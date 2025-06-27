@@ -1,0 +1,1409 @@
+2025.06.26 10:11:40 INFO  Started: Metals version 1.6.0 in folders 'C:\Users\19567\Desktop\project' for client Visual Studio Code 1.101.1.
+2025.06.26 10:11:40 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 10:11:44 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 10:11:44 INFO  Attempting to connect to the build server...
+2025.06.26 10:11:53 INFO  Running BSP server List(C:\Program Files\Java\jdk-24/bin/java, -Xms100m, -Xmx100m, -classpath, C:\Users\19567\Desktop\project\.bsp\sbt-launch.jar, -Dsbt.script=C:\sbt\bin\sbt.bat, xsbt.boot.Boot, -bsp)
+2025.06.26 10:11:53 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at C:\Users\19567\Desktop\project\.metals\bsp.trace.json or C:\Users\19567\AppData\Local\scalameta\metals\cache\bsp.trace.json
+2025.06.26 10:11:55 INFO  BSP server: WARNING: A restricted method in java.lang.System has been called
+2025.06.26 10:11:55 INFO  BSP server: WARNING: java.lang.System::load has been called by com.sun.jna.Native in an unnamed module (file:/C:/Users/19567/.sbt/boot/scala-2.12.20/org.scala-sbt/sbt/1.11.2/jna-5.12.0.jar)
+2025.06.26 10:11:55 INFO  BSP server: WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+2025.06.26 10:11:55 INFO  BSP server: WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+2025.06.26 10:11:55 INFO  BSP server: 
+2025.06.26 10:11:55 INFO  BSP server: WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+2025.06.26 10:11:55 INFO  BSP server: WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by net.openhft.hashing.UnsafeAccess (file:/C:/Users/19567/.sbt/boot/scala-2.12.20/org.scala-sbt/sbt/1.11.2/zero-allocation-hashing-0.16.jar)
+2025.06.26 10:11:55 INFO  BSP server: WARNING: Please consider reporting this to the maintainers of class net.openhft.hashing.UnsafeAccess
+2025.06.26 10:11:55 INFO  BSP server: WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+2025.06.26 10:11:55 INFO  BSP server: [info] server was not detected. starting an instance
+2025.06.26 10:11:58 INFO  BSP server: WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+2025.06.26 10:11:58 INFO  BSP server: WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by net.openhft.hashing.UnsafeAccess (file:/C:/Users/19567/.sbt/boot/scala-2.12.20/org.scala-sbt/sbt/1.11.2/zero-allocation-hashing-0.16.jar)
+2025.06.26 10:11:58 INFO  BSP server: WARNING: Please consider reporting this to the maintainers of class net.openhft.hashing.UnsafeAccess
+2025.06.26 10:11:58 INFO  BSP server: WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+2025.06.26 10:11:58 INFO  BSP server: WARNING: A restricted method in java.lang.System has been called
+2025.06.26 10:11:58 INFO  BSP server: WARNING: java.lang.System::load has been called by com.sun.jna.Native in an unnamed module (file:/C:/Users/19567/.sbt/boot/scala-2.12.20/org.scala-sbt/sbt/1.11.2/jna-5.12.0.jar)
+2025.06.26 10:11:58 INFO  BSP server: WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+2025.06.26 10:11:58 INFO  BSP server: WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+2025.06.26 10:11:58 INFO  BSP server: 
+2025.06.26 10:11:59 INFO  BSP server: [info] welcome to sbt 1.11.2 (Oracle Corporation Java 24.0.1)
+2025.06.26 10:11:59 INFO  BSP server: [info] loading settings for project banked-build-build from metals.sbt...
+2025.06.26 10:12:01 INFO  BSP server: [info] loading project definition from C:\Users\19567\Desktop\project\banked\project\project
+2025.06.26 10:12:01 INFO  BSP server: [info] loading settings for project banked-build from metals.sbt...
+2025.06.26 10:12:02 INFO  BSP server: [info] loading project definition from C:\Users\19567\Desktop\project\banked\project
+2025.06.26 10:12:02 INFO  BSP server: [info] loading settings for project root from build.sbt...
+2025.06.26 10:12:02 INFO  BSP server: [info] set current project to UserBackend (in build file:/C:/Users/19567/Desktop/project/banked/)
+2025.06.26 10:12:03 INFO  BSP server: [info] sbt server started at local:sbt-server-2b0493594e511160465e
+2025.06.26 10:12:03 INFO  BSP server: [info] started sbt server
+2025.06.26 10:12:03 INFO  time: Connected to build server in 18s
+2025.06.26 10:12:03 INFO  Connected to Build server: sbt v1.11.2
+2025.06.26 10:12:03 INFO  Processing workspace/buildTargets
+2025.06.26 10:12:03 INFO  Processing buildTarget/scalacOptions
+2025.06.26 10:12:03 INFO  Processing buildTarget/sources
+2025.06.26 10:12:03 INFO  Processing buildTarget/dependencySources
+2025.06.26 10:12:07 INFO  time: Imported build in 4.34s
+2025.06.26 10:12:22 INFO  time: indexed workspace in 14s
+2025.06.26 10:12:22 INFO  Processing buildTarget/scalaTestClasses
+2025.06.26 10:12:22 INFO  compiling root
+2025.06.26 10:12:22 INFO  compiling root-test
+2025.06.26 10:12:22 INFO  compiling 1 Scala source to C:\Users\19567\Desktop\project\banked\target\scala-3.4.2\test-classes ...
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:3:24 
+3 |class HelloSpec extends munit.FunSuite {
+  |                        ^^^^^
+  |                        Not found: munit - did you mean Unit?
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:4:2 
+4 |  test("say hello") {
+  |  ^^^^
+  |  Not found: test
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:4 
+5 |    assertEquals(Hello.greeting, "hello")
+  |    ^^^^^^^^^^^^
+  |    Not found: assertEquals
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:17 
+5 |    assertEquals(Hello.greeting, "hello")
+  |                 ^^^^^
+  |                 Not found: Hello
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR four errors found
+2025.06.26 10:12:25 INFO  time: compiled root-test in 2.58s
+2025.06.26 10:12:25 INFO  Processing buildTarget/scalaMainClasses
+exception caught when loading module class module-info$: java.lang.AssertionError: assertion failed: attempt to parse java.lang.Object from classfile
+2025.06.26 10:12:25 INFO  compiling root
+2025.06.26 10:12:25 INFO  compiling root-test
+2025.06.26 10:12:25 INFO  compiling 1 Scala source to C:\Users\19567\Desktop\project\banked\target\scala-3.4.2\test-classes ...
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:3:24 
+3 |class HelloSpec extends munit.FunSuite {
+  |                        ^^^^^
+  |                        Not found: munit - did you mean Unit?
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:4:2 
+4 |  test("say hello") {
+  |  ^^^^
+  |  Not found: test
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:4 
+5 |    assertEquals(Hello.greeting, "hello")
+  |    ^^^^^^^^^^^^
+  |    Not found: assertEquals
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:17 
+5 |    assertEquals(Hello.greeting, "hello")
+  |                 ^^^^^
+  |                 Not found: Hello
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:25 ERROR four errors found
+2025.06.26 10:12:25 INFO  time: compiled root-test in 0.31s
+2025.06.26 10:12:25 INFO  Processing buildTarget/compile
+2025.06.26 10:12:25 INFO  compiling root
+2025.06.26 10:12:25 INFO  compiling root-test
+2025.06.26 10:12:25 INFO  compiling 1 Scala source to C:\Users\19567\Desktop\project\banked\target\scala-3.4.2\test-classes ...
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:3:24 
+3 |class HelloSpec extends munit.FunSuite {
+  |                        ^^^^^
+  |                        Not found: munit - did you mean Unit?
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:4:2 
+4 |  test("say hello") {
+  |  ^^^^
+  |  Not found: test
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:4 
+5 |    assertEquals(Hello.greeting, "hello")
+  |    ^^^^^^^^^^^^
+  |    Not found: assertEquals
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:17 
+5 |    assertEquals(Hello.greeting, "hello")
+  |                 ^^^^^
+  |                 Not found: Hello
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR four errors found
+2025.06.26 10:12:26 INFO  time: compiled root-test in 0.23s
+2025.06.26 10:12:26 ERROR (Test / compileIncremental) Compilation failed
+2025.06.26 10:12:26 INFO  Cancelling compilation on sbt server
+org.eclipse.lsp4j.jsonrpc.ResponseErrorException: (Test / compileIncremental) Compilation failed
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:204)
+	at scala.meta.internal.metals.RequestMonitorImpl$$anon$1.consume(ServerLivenessMonitor.scala:41)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.26 10:12:26 INFO  Processing buildTarget/scalaTestClasses
+2025.06.26 10:12:26 INFO  compiling root
+2025.06.26 10:12:26 INFO  compiling root-test
+2025.06.26 10:12:26 INFO  compiling 1 Scala source to C:\Users\19567\Desktop\project\banked\target\scala-3.4.2\test-classes ...
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:3:24 
+3 |class HelloSpec extends munit.FunSuite {
+  |                        ^^^^^
+  |                        Not found: munit - did you mean Unit?
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:4:2 
+4 |  test("say hello") {
+  |  ^^^^
+  |  Not found: test
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:4 
+5 |    assertEquals(Hello.greeting, "hello")
+  |    ^^^^^^^^^^^^
+  |    Not found: assertEquals
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:17 
+5 |    assertEquals(Hello.greeting, "hello")
+  |                 ^^^^^
+  |                 Not found: Hello
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:26 ERROR four errors found
+2025.06.26 10:12:26 INFO  time: compiled root-test in 0.42s
+2025.06.26 10:12:26 INFO  Scala test classes not supported by server
+org.eclipse.lsp4j.jsonrpc.ResponseErrorException: (Test / compileIncremental) Compilation failed
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:204)
+	at scala.meta.internal.metals.RequestMonitorImpl$$anon$1.consume(ServerLivenessMonitor.scala:41)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.26 10:12:26 ERROR (Test / compileIncremental) Compilation failed
+2025.06.26 10:12:26 INFO  Processing buildTarget/scalaMainClasses
+2025.06.26 10:12:27 INFO  compiling root
+2025.06.26 10:12:27 INFO  compiling root-test
+2025.06.26 10:12:27 INFO  compiling 1 Scala source to C:\Users\19567\Desktop\project\banked\target\scala-3.4.2\test-classes ...
+2025.06.26 10:12:27 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:3:24 
+3 |class HelloSpec extends munit.FunSuite {
+  |                        ^^^^^
+  |                        Not found: munit - did you mean Unit?
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:27 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:4:2 
+4 |  test("say hello") {
+  |  ^^^^
+  |  Not found: test
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:27 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:4 
+5 |    assertEquals(Hello.greeting, "hello")
+  |    ^^^^^^^^^^^^
+  |    Not found: assertEquals
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:27 ERROR -- [E006] Not Found Error: C:\Users\19567\Desktop\project\banked\src\test\scala\example\HelloSpec.scala:5:17 
+5 |    assertEquals(Hello.greeting, "hello")
+  |                 ^^^^^
+  |                 Not found: Hello
+  |
+  | longer explanation available when compiling with `-explain`
+2025.06.26 10:12:27 ERROR four errors found
+2025.06.26 10:12:27 INFO  time: compiled root-test in 0.34s
+2025.06.26 10:12:27 ERROR (Test / compileIncremental) Compilation failed
+2025.06.26 10:12:27 INFO  Scala main classes not supported by server
+org.eclipse.lsp4j.jsonrpc.ResponseErrorException: (Test / compileIncremental) Compilation failed
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:204)
+	at scala.meta.internal.metals.RequestMonitorImpl$$anon$1.consume(ServerLivenessMonitor.scala:41)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.26 10:12:27 INFO  Processing buildTarget/jvmRunEnvironment
+2025.06.26 10:12:27 INFO  compiling root
+2025.06.26 10:12:27 INFO  Processing buildTarget/jvmRunEnvironment
+2025.06.26 10:12:27 INFO  compiling root
+exception caught when loading module class module-info$: java.lang.AssertionError: assertion failed: attempt to parse java.lang.Object from classfile
+2025.06.26 10:13:03 INFO  Processing buildTarget/compile
+2025.06.26 10:14:03 INFO  Processing buildTarget/compile
+2025.06.26 10:15:03 INFO  Processing buildTarget/compile
+2025.06.26 10:16:03 INFO  Processing buildTarget/compile
+2025.06.26 10:17:03 INFO  Processing buildTarget/compile
+2025.06.26 10:18:03 INFO  Processing buildTarget/compile
+2025.06.26 10:19:03 INFO  Processing buildTarget/compile
+2025.06.26 10:20:03 INFO  Processing buildTarget/compile
+2025.06.26 10:21:03 INFO  Processing buildTarget/compile
+2025.06.26 10:22:03 INFO  Processing buildTarget/compile
+2025.06.26 10:27:46 INFO  Shutting down server
+2025.06.26 10:27:46 INFO  shutting down Metals
+2025.06.26 10:27:46 INFO  Shut down connection with build server.
+2025.06.26 10:27:46 INFO  Exiting server
+2025.06.26 11:30:23 INFO  Started: Metals version 1.6.0 in folders 'C:\Users\19567\Desktop\project' for client Visual Studio Code 1.101.2.
+2025.06.26 11:30:24 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 11:30:26 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 11:30:26 INFO  Attempting to connect to the build server...
+2025.06.26 11:30:41 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.26 11:30:41 WARN  no build target for: C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala
+2025.06.26 11:30:41 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 11:30:41 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 11:30:41 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 11:34:32 INFO  no build target found for C:\Users\19567\Desktop\project\banked\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.26 11:37:30 INFO  Shutting down server
+2025.06.26 11:37:30 INFO  shutting down Metals
+2025.06.26 11:37:30 INFO  Exiting server
+2025.06.27 02:10:52 INFO  Started: Metals version 1.6.0 in folders 'C:\Users\19567\Desktop\project' for client Visual Studio Code 1.101.2.
+2025.06.27 02:10:53 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:10:53 INFO  Attempting to connect to the build server...
+2025.06.27 02:10:58 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:10:58 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:10:59 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 2:10:59 上午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 10
+2025.06.27 02:11:01 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:11:01 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:01 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 2:11:01 上午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 16
+2025.06.27 02:11:01 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:11:01 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:01 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 2:11:02 上午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 22
+2025.06.27 02:11:01 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:04 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:04 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:04 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:06 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:08 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 02:11:08 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:11:08 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:11:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:11:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:19 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:18:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:20 INFO  Created report: Optional[file:///C:/Users/19567/Desktop/project/backend/src/main/scala/example/main.scala]
+2025.06.27 02:18:20 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 02:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:22 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:20:23 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:20:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:20:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:20:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:20:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:20:24 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 02:20:24 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 02:20:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:20:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:20:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 02:45:33 INFO  Shutting down server
+2025.06.27 02:45:33 INFO  shutting down Metals
+2025.06.27 02:45:33 INFO  Exiting server
+2025.06.27 04:44:49 INFO  Started: Metals version 1.6.0 in folders 'C:\Users\19567\Desktop\project' for client Visual Studio Code 1.101.2.
+2025.06.27 04:44:49 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:50 INFO  Attempting to connect to the build server...
+2025.06.27 04:44:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 4:44:51 上午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 1
+2025.06.27 04:44:51 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:44:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 4:44:57 上午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 13
+2025.06.27 04:44:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 4:44:58 上午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 20
+2025.06.27 04:44:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:58 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:58 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:44:58 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:44:58 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:45:05 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 04:45:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:45:05 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:45:05 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:45:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:30 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:52:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:52 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:52:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:52:52 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 04:55:16 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:55:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:17 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:55:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:17 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 04:55:16 INFO  Attempting to connect to the build server...
+2025.06.27 04:55:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:21 INFO  Created report: Optional[file:///C:/Users/19567/Desktop/project/backend/build.sbt]
+2025.06.27 04:55:21 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 04:55:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:22 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 04:55:23 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:55:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:23 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:55:26 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:55:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:27 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:55:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:32 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 04:55:32 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 04:55:32 INFO  Attempting to connect to the build server...
+2025.06.27 04:55:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:39 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 04:55:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:39 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:55:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:55:47 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 04:56:32 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:56:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:32 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:33 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:35 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:35 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:36 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:56:36 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 04:56:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:36 INFO  Attempting to connect to the build server...
+2025.06.27 04:56:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:36 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:56:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:36 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 04:56:36 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:51 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 04:56:51 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 04:56:51 INFO  Attempting to connect to the build server...
+2025.06.27 04:56:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:52 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:53 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:53 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:53 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:54 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:56:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:53 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:55 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:56 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 04:56:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:55 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 04:56:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:58 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:58 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:58 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:56:58 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:56:58 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:56:58 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:57:06 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 04:57:06 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 04:57:06 INFO  Attempting to connect to the build server...
+2025.06.27 04:57:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:16 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:57:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:17 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:57:17 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 04:57:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:17 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 04:57:21 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 04:57:21 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 04:57:21 INFO  Attempting to connect to the build server...
+2025.06.27 04:57:23 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:57:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:24 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 04:57:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 04:57:24 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 04:57:36 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:00:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:00:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:00:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:00:51 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:00:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:00:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:01:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:01:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:01:56 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:01:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:01:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:03 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:03:03 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:04 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:04 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:03 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:06 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:07 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:08 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:08 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:09 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:03:09 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 05:03:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:08 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:03:09 INFO  Attempting to connect to the build server...
+2025.06.27 05:03:09 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:08 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:03:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:09 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:10 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:03:10 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:11 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:11 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:03:10 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:10 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:11 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:11 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:10 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:12 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 05:03:12 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:03:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:03:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:03:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:16 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:03:16 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:03:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:03:24 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:03:24 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:03:24 INFO  Attempting to connect to the build server...
+2025.06.27 05:03:39 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:05:18 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:05:18 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:18 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:18 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:18 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:18 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:05:19 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  Attempting to connect to the build server...
+2025.06.27 05:05:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:20 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 05:05:19 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:05:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:19 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 05:05:19 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:05:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:05:35 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:05:35 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:05:35 INFO  Attempting to connect to the build server...
+2025.06.27 05:05:50 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:06:21 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:06:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:22 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:06:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:22 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:06:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:22 INFO  Attempting to connect to the build server...
+2025.06.27 05:06:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:06:22 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 05:06:37 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:08:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:16 INFO  empty definition using pc, found symbol in pc:  (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_04-55-21-138.md")
+2025.06.27 05:08:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:16 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:08:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:17 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:08:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:16 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:08:16 INFO  Attempting to connect to the build server...
+2025.06.27 05:08:17 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:08:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:17 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:08:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:08:17 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:08:32 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:08:32 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:08:32 INFO  Attempting to connect to the build server...
+2025.06.27 05:08:47 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:22:54 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:22:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:22:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:22:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:22:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:22:54 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:22:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:22:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:22:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:22:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:24:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:24:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:24:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:24:52 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 05:24:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:26:35 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:26:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:26:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:26:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:26:39 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:27 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:27:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:29 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:30 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:27:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:37 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:27:37 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:27:38 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:28:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:28:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:28:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:30 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:31:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:30 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:31:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:30 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:30 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:31:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:31 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:31:31 INFO  Attempting to connect to the build server...
+2025.06.27 05:31:30 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:31:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:31 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:31:46 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:31:56 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:56 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:31:57 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 05:32:18 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:54 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:34:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:00 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:00 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:35:00 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:05 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 05:35:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:05 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:35:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:06 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:06 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:35:06 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:09 WARN  no build target for: C:\Users\19567\Desktop\project\backend\build.sbt
+2025.06.27 05:35:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:09 WARN  No build session currently active to reload. Attempting to reconnect.
+2025.06.27 05:35:09 INFO  Attempting to connect to the build server...
+2025.06.27 05:35:09 WARN  Could not find semantic tokens for: file:///C:/Users/19567/Desktop/project/backend/build.sbt
+2025.06.27 05:35:10 INFO  no build target found for C:\Users\19567\Desktop\project\backend\build.sbt. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:35:24 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 05:41:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:44 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:41:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:55 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:41:55 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:41:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:13 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 05:42:12 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:40 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:42:41 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:25 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:44:25 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:25 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:25 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:29 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:29 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:29 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:41 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:43 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:45 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:46 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:44:46 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:44:46 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:45:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:45:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:45:26 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 05:45:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:45:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:45:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 05:45:26 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:45:04 INFO  Started: Metals version 1.6.0 in folders 'C:\Users\19567\Desktop\project' for client Visual Studio Code 1.101.2.
+2025.06.27 14:45:10 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:45:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:45:16 INFO  Attempting to connect to the build server...
+2025.06.27 14:45:31 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 14:45:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:45:31 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 14:45:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:45:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:45:33 INFO  time: code lens generation in 1.16s
+2025.06.27 14:47:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:47:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:47:11 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:47:11 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 14:47:11 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 2:47:11 下午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 13
+2025.06.27 14:47:11 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:47:11 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:52:03 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:52:03 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:53:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:53:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:53:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:53:52 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 14:53:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:53:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 14:53:53 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+6月 27, 2025 2:53:53 下午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 29
+2025.06.27 14:53:53 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:00:31 INFO  Shutting down server
+2025.06.27 15:00:31 INFO  shutting down Metals
+2025.06.27 15:00:31 INFO  Exiting server
+2025.06.27 15:05:34 INFO  Started: Metals version 1.6.0 in folders 'C:\Users\19567\Desktop\project' for client Visual Studio Code 1.101.2.
+2025.06.27 15:05:35 INFO  Attempting to connect to the build server...
+2025.06.27 15:05:50 ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.TimeoutException: Future timed out after [15 seconds]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryAwait0(Promise.scala:248)
+	at scala.concurrent.impl.Promise$DefaultPromise.result(Promise.scala:261)
+	at scala.concurrent.Await$.$anonfun$result$1(package.scala:201)
+	at scala.concurrent.BlockContext$DefaultBlockContext$.blockOn(BlockContext.scala:62)
+	at scala.concurrent.Await$.result(package.scala:124)
+	at scala.meta.internal.metals.MetalsEnrichments$XtensionScalaFuture.$anonfun$withTimeout$1(MetalsEnrichments.scala:296)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.lang.Thread.run(Thread.java:1447)
+
+2025.06.27 15:05:50 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:05:50 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:12:35 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:12:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:12:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:12:35 下午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 3
+2025.06.27 15:12:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:34 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:16:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:36 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:16:37 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-16-37-256.md
+2025.06.27 15:16:41 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:41 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:41 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:41 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:44 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:16:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:44 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:44 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 15:16:45 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:46 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:46 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:16:46 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-16-46-298.md
+2025.06.27 15:16:49 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:49 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:49 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:16:49 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:49 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:49 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:53 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:16:59 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:28 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:17:28 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:28 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:28 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:28 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:33 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:33 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:32 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:17:33 下午 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 131
+2025.06.27 15:17:33 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:33 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:17:33 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:33 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 15:17:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:35 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:17:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:35 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:38 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:50 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:52 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:17:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:17:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:01 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:20 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:21 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:22 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:23 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:18:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:23 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-23-509.md
+2025.06.27 15:18:23 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:24 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-24-375.md
+2025.06.27 15:18:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:24 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:18:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:24 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-24-594.md
+2025.06.27 15:18:24 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:27 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:27 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-27-923.md
+2025.06.27 15:18:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:31 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-31-308.md
+2025.06.27 15:18:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:31 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:34 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:40 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:40 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-40-481.md
+2025.06.27 15:18:40 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:40 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:43 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:43 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-43-542.md
+2025.06.27 15:18:45 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:45 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-45-136.md
+2025.06.27 15:18:46 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:46 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:46 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:49 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:51 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:51 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-51-364.md
+2025.06.27 15:18:52 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:18:57 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:18:57 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-18-57-324.md
+2025.06.27 15:18:59 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:19:00 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-19-00-047.md
+2025.06.27 15:19:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:19:05 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-19-05-859.md
+2025.06.27 15:20:14 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:15 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-15-064.md
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:15 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-15-292.md
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:15 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-15-642.md
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:15 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-15-777.md
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:15 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-15-958.md
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:16 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:16 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-16-168.md
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:16 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-16-326.md
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:16 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-16-452.md
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:16 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-16-630.md
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:16 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-16-760.md
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:15 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:17 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-17-007.md
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:16 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:17 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-17-229.md
+2025.06.27 15:20:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:20:17 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-20-17-392.md
+2025.06.27 15:20:17 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:20:17 INFO  empty definition using pc, found symbol in pc: `<none>`. (full report at: "C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_empty-definition_02-18-21-404.md")
+2025.06.27 15:21:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:21:09 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-21-09-439.md
+2025.06.27 15:21:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:21:09 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:31:05 WARN  no build target for: C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala
+2025.06.27 15:31:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:31:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:31:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:31:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.06.27 15:31:05 INFO  no build target found for C:\Users\19567\Desktop\project\backend\src\main\scala\example\main.scala. Using presentation compiler with project's scala-library version: 3.3.6
+6月 27, 2025 3:31:05 下午 scala.meta.internal.pc.CompilerAccess handleError
+严重: A severe compiler error occurred, full details of the error can be found in the error report C:\Users\19567\Desktop\project\.metals\.reports\metals-full\2025-06-27\r_compiler-error_15-31-05-864.md
+2025.06.27 15:31:08 INFO  Shutting down server
+2025.06.27 15:31:08 INFO  shutting down Metals
+2025.06.27 15:31:08 INFO  Exiting server

@@ -1,4 +1,4 @@
-frontend：npm run dev
+frontend：npm install， npm run dev
 
-backend：sbt clean run
+backend：sbt (clean) run
 

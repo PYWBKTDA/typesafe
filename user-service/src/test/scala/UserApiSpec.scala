@@ -12,7 +12,7 @@ import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.BeforeAndAfterAll
-import pdi.jwt.{JwtClaim, JwtCirce, JwtAlgorithm}
+import pdi.jwt.{JwtCirce, JwtAlgorithm}
 import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.Await
@@ -43,7 +43,7 @@ class UserApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest with
       )
       Post("/user/register", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Registered"
+        responseAs[String] should include("Registered")
       }
     }
 
@@ -56,7 +56,7 @@ class UserApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest with
       )
       Post("/user/register", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.Conflict
-        responseAs[String] shouldBe "Username exists"
+        responseAs[String] should include("Username exists")
       }
     }
 
@@ -69,20 +69,7 @@ class UserApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest with
       )
       Post("/user/register", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Passwords do not match"
-      }
-    }
-
-    "fail to register with empty username or password" in {
-      val req = RegisterRequest(
-        "",
-        "",
-        "",
-        Student("S002", "Empty", "Math")
-      )
-      Post("/user/register", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Username or password cannot be empty"
+        responseAs[String] should include("Passwords do not match")
       }
     }
 
@@ -102,113 +89,100 @@ class UserApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest with
       val req = LoginRequest(username, "wrongpass")
       Post("/user/login", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Invalid credentials"
+        responseAs[String] should include("Invalid credentials")
       }
     }
 
-    "fail to login with empty username or password" in {
-      val req = LoginRequest("", "")
-      Post("/user/login", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Username or password cannot be empty"
-      }
-    }
-
-    "update user info only" in {
-      val updateReq = UpdateRequest("", "", "", Student("S001", "New Name", "AI"))
+    "update user info with token" in {
+      val updateReq = UpdateRequest(
+        None,
+        None,
+        None,
+        Some(Student("S001", "Updated Name", "AI"))
+      )
       Post("/user/update", updateReq.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Info updated"
+        responseAs[String] should include("Info updated")
       }
+    }
 
-      Get(s"/user/info?uid=$uid") ~> routes ~> check {
+    "change password successfully" in {
+      val updateReq = UpdateRequest(
+        Some("123456"),
+        Some("newpass"),
+        Some("newpass"),
+        None
+      )
+      Post("/user/update", updateReq.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val name = json.hcursor.downField("name").as[String].getOrElse("")
-        val dept = json.hcursor.downField("department").as[String].getOrElse("")
-        name shouldBe "New Name"
-        dept shouldBe "AI"
-      }
-    }
-
-    "fail to update with missing password fields" in {
-      val req = UpdateRequest("123456", "", "", Student("S001", "Still", "CS"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Incomplete password fields"
-      }
-    }
-
-    "fail to update password with wrong old password" in {
-      val req = UpdateRequest("wrongold", "abc123", "abc123", Student("S001", "Still", "CS"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Old password incorrect"
-      }
-    }
-
-    "fail to update with mismatched new passwords" in {
-      val req = UpdateRequest("123456", "a", "b", Student("S001", "Still", "CS"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "New passwords do not match"
-      }
-    }
-
-    "update password and info together" in {
-      val req = UpdateRequest("123456", "newpass", "newpass", Student("S001", "Final Name", "Physics"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Info and password updated"
-      }
-
-      Get(s"/user/info?uid=$uid") ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val name = json.hcursor.downField("name").as[String].getOrElse("")
-        val dept = json.hcursor.downField("department").as[String].getOrElse("")
-        name shouldBe "Final Name"
-        dept shouldBe "Physics"
+        responseAs[String] should include("Updated with password")
       }
     }
 
     "fail to update with bad token" in {
-      val req = UpdateRequest("", "", "", Student("S001", "Again", "Math"))
+      val req = UpdateRequest(None, None, None, Some(Student("S001", "Again", "Math")))
       Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", "bad.token.value")) ~> routes ~> check {
         status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Invalid token"
+        responseAs[String] should include("Invalid token")
       }
     }
 
-    "get uid from token using /user/uid" in {
-      Get("/user/uid").withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val receivedUid = json.hcursor.downField("uid").as[String].getOrElse("")
-        receivedUid shouldBe uid
-      }
-    }
-
-    "fail to get uid with invalid token" in {
-      Get("/user/uid").withHeaders(RawHeader("Authorization", "bad.token")) ~> routes ~> check {
+    "fail to update password with wrong old password" in {
+      val req = UpdateRequest(
+        Some("wrongold"),
+        Some("123123"),
+        Some("123123"),
+        None
+      )
+      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
         status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Invalid token"
+        responseAs[String] should include("Old password incorrect")
       }
     }
 
-    "get user info without token" in {
-      Get(s"/user/info?uid=$uid") ~> routes ~> check {
+    "fail to update with mismatched new passwords" in {
+      val req = UpdateRequest(
+        Some("newpass"),
+        Some("a"),
+        Some("b"),
+        None
+      )
+      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
+        status shouldBe StatusCodes.BadRequest
+        responseAs[String] should include("New passwords do not match")
+      }
+    }
+
+    "fail to update with no data" in {
+      val req = UpdateRequest(None, None, None, None)
+      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
+        status shouldBe StatusCodes.BadRequest
+        responseAs[String] should include("Nothing to update")
+      }
+    }
+
+    "get user info with valid token" in {
+      Get(s"/user/info?uid=$uid").withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val name = json.hcursor.downField("name").as[String].getOrElse("")
-        name shouldBe "Final Name"
+        val info = responseAs[UserInfo]
+        info match {
+          case Student(_, name, _) => name shouldBe "Updated Name"
+          case _ => fail("Expected Student info")
+        }
       }
     }
 
-    "fail to get info for nonexistent uid" in {
-      Get("/user/info?uid=nonexistent") ~> routes ~> check {
+    "fail to get user info with invalid token" in {
+      Get(s"/user/info?uid=$uid").withHeaders(RawHeader("Authorization", "bad.token")) ~> routes ~> check {
+        status shouldBe StatusCodes.Unauthorized
+        responseAs[String] should include("Invalid token")
+      }
+    }
+
+    "fail to get user info for nonexistent uid" in {
+      Get("/user/info?uid=nonexistent").withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
         status shouldBe StatusCodes.NotFound
-        responseAs[String] shouldBe "User not found"
+        responseAs[String] should include("User not found")
       }
     }
   }

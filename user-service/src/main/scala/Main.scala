@@ -38,18 +38,18 @@ object UserInfo {
 case class User(uid: String, username: String, password: String, info: UserInfo)
 case class RegisterRequest(username: String, password: String, confirmPassword: String, info: UserInfo)
 case class LoginRequest(username: String, password: String)
-case class UpdateRequest(oldPassword: Option[String], newPassword: Option[String], confirmPassword: Option[String], info: Option[UserInfo])
+case class UpdateRequest(oldPassword: String, newPassword: String, confirmPassword: String, info: UserInfo)
 
 class UserTable(tag: Tag) extends Table[User](tag, "users") {
   def uid = column[String]("uid", O.PrimaryKey)
   def username = column[String]("username", O.Unique)
   def password = column[String]("password")
   def info = column[String]("info")
-  def * = (uid, username, password, info).<>( 
-    { case (u,n,p,i) =>
+  def * = (uid, username, password, info).<>(
+    { case (u, n, p, i) =>
       val json = parse(i).getOrElse(Json.Null)
-      val info = json.as[UserInfo].getOrElse(Student("","",""))
-      User(u,n,p,info)
+      val info = json.as[UserInfo].getOrElse(Student("", "", ""))
+      User(u, n, p, info)
     },
     (u: User) => Some((u.uid, u.username, u.password, u.info.asJson.noSpaces))
   )
@@ -76,7 +76,10 @@ object Main {
       path("register") {
         post {
           entity(as[RegisterRequest]) { req =>
-            if (req.password != req.confirmPassword) complete(StatusCodes.BadRequest -> "Passwords do not match")
+            if (req.username.trim.isEmpty || req.password.trim.isEmpty)
+              complete(StatusCodes.BadRequest -> "Username or password cannot be empty")
+            else if (req.password != req.confirmPassword)
+              complete(StatusCodes.BadRequest -> "Passwords do not match")
             else {
               val action = users.filter(_.username === req.username).result.headOption.flatMap {
                 case Some(_) => DBIO.successful(Left("Username exists"))
@@ -98,13 +101,17 @@ object Main {
       path("login") {
         post {
           entity(as[LoginRequest]) { req =>
-            onComplete(db.run(users.filter(_.username === req.username).result.headOption)) {
-              case Success(Some(user)) if req.password.isBcrypted(user.password) =>
-                complete(StatusCodes.OK -> Map("token" -> generateToken(user.uid)))
-              case Success(_) =>
-                complete(StatusCodes.Unauthorized -> "Invalid credentials")
-              case Failure(ex) =>
-                throw ex
+            if (req.username.trim.isEmpty || req.password.trim.isEmpty)
+              complete(StatusCodes.BadRequest -> "Username or password cannot be empty")
+            else {
+              onComplete(db.run(users.filter(_.username === req.username).result.headOption)) {
+                case Success(Some(user)) if req.password.isBcrypted(user.password) =>
+                  complete(StatusCodes.OK -> Map("token" -> generateToken(user.uid)))
+                case Success(_) =>
+                  complete(StatusCodes.Unauthorized -> "Invalid credentials")
+                case Failure(ex) =>
+                  throw ex
+              }
             }
           }
         }
@@ -117,26 +124,30 @@ object Main {
                 onComplete(db.run(users.filter(_.uid === uid).result.headOption)) {
                   case Success(Some(user)) =>
                     entity(as[UpdateRequest]) { req =>
-                      val fut: Future[Route] = (req.oldPassword, req.newPassword, req.confirmPassword) match {
-                        case (Some(oldP), Some(newP), Some(conf)) =>
-                          if (!oldP.isBcrypted(user.password)) Future.successful(complete(StatusCodes.Unauthorized -> "Old password incorrect"))
-                          else if (newP != conf) Future.successful(complete(StatusCodes.BadRequest -> "New passwords do not match"))
-                          else {
-                            val upd = user.copy(password = newP.bcrypt, info = req.info.getOrElse(user.info))
-                            db.run(users.filter(_.uid === uid).update(upd)).map(_ => complete(StatusCodes.OK -> "Updated with password"))
+                      val hasPasswordUpdate = req.oldPassword.nonEmpty || req.newPassword.nonEmpty || req.confirmPassword.nonEmpty
+                      if (!hasPasswordUpdate) {
+                        val updatedUser = user.copy(info = req.info)
+                        onComplete(db.run(users.filter(_.uid === uid).update(updatedUser))) {
+                          case Success(_) => complete(StatusCodes.OK -> "Info updated")
+                          case Failure(ex) => throw ex
+                        }
+                      } else {
+                        if (req.oldPassword.isEmpty || req.newPassword.isEmpty || req.confirmPassword.isEmpty)
+                          complete(StatusCodes.BadRequest -> "Incomplete password fields")
+                        else if (!req.oldPassword.isBcrypted(user.password))
+                          complete(StatusCodes.Unauthorized -> "Old password incorrect")
+                        else if (req.newPassword != req.confirmPassword)
+                          complete(StatusCodes.BadRequest -> "New passwords do not match")
+                        else {
+                          val updatedUser = user.copy(
+                            password = req.newPassword.bcrypt,
+                            info = req.info
+                          )
+                          onComplete(db.run(users.filter(_.uid === uid).update(updatedUser))) {
+                            case Success(_) => complete(StatusCodes.OK -> "Info and password updated")
+                            case Failure(ex) => throw ex
                           }
-                        case _ =>
-                          req.info match {
-                            case Some(i) =>
-                              val upd = user.copy(info = i)
-                              db.run(users.filter(_.uid === uid).update(upd)).map(_ => complete(StatusCodes.OK -> "Info updated"))
-                            case None =>
-                              Future.successful(complete(StatusCodes.BadRequest -> "Nothing to update"))
-                          }
-                      }
-                      onComplete(fut) {
-                        case Success(route) => route
-                        case Failure(ex)    => throw ex
+                        }
                       }
                     }
                   case Success(None) => complete(StatusCodes.NotFound -> "User not found")
@@ -147,19 +158,23 @@ object Main {
           }
         }
       } ~
+      path("uid") {
+        get {
+          headerValueByName("Authorization") { token =>
+            verifyToken(token) match {
+              case Some(uid) => complete(StatusCodes.OK -> Json.obj("uid" -> Json.fromString(uid)))
+              case None      => complete(StatusCodes.Unauthorized -> "Invalid token")
+            }
+          }
+        }
+      } ~
       path("info") {
         get {
           parameters("uid") { uid =>
-            headerValueByName("Authorization") { token =>
-              verifyToken(token) match {
-                case Some(_) =>
-                  onComplete(db.run(users.filter(_.uid === uid).result.headOption)) {
-                    case Success(Some(user)) => complete(StatusCodes.OK -> user.info.asJson)
-                    case Success(None) => complete(StatusCodes.NotFound -> "User not found")
-                    case Failure(ex) => throw ex
-                  }
-                case None => complete(StatusCodes.Unauthorized -> "Invalid token")
-              }
+            onComplete(db.run(users.filter(_.uid === uid).result.headOption)) {
+              case Success(Some(user)) => complete(StatusCodes.OK -> user.info.asJson)
+              case Success(None)       => complete(StatusCodes.NotFound -> "User not found")
+              case Failure(ex)         => throw ex
             }
           }
         }

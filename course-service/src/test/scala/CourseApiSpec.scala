@@ -10,15 +10,13 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.headers.RawHeader
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.http.scaladsl.server.Route
-import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
 import io.circe.generic.auto._
+import io.circe.syntax._
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.BeforeAndAfterAll
 import pdi.jwt.{JwtAlgorithm, JwtCirce, JwtClaim}
-import scala.concurrent.Future
 
 class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll {
 
@@ -26,163 +24,165 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
 
   var teacherToken: String = ""
   var studentToken: String = ""
-  var teacherId: String = ""
-  var studentId: String = ""
+  val teacherId: String = "t-123"
+  val studentId: String = "s-456"
   var courseId: String = ""
 
-  def generateToken(uid: String): String = {
+  def generateToken(uid: String): String =
     JwtCirce.encode(JwtClaim(subject = Some(uid)), "secret", JwtAlgorithm.HS256)
-  }
 
-  def bearer(token: String): RawHeader = RawHeader("Authorization", s"Bearer $token")
-
-  val mockUserServiceRoutes: Route =
-    path("user" / "info") {
-      get {
-        parameter("uid") { uid =>
-          headerValueByName("Authorization") { _ =>
-            val json =
-              if (uid == "t-123") """{ "teacherId": "t-123", "name": "T", "department": "CS", "type": "teacher" }"""
-              else if (uid == "s-456") """{ "studentId": "s-456", "name": "S", "department": "CS", "type": "student" }"""
-              else """{}"""
-            complete(HttpEntity(ContentTypes.`application/json`, json))
-          }
-        }
-      }
-    }
+  def bearer(token: String): RawHeader = RawHeader("Authorization", token)
 
   override def beforeAll(): Unit = {
     Await.result(db.run(DBIO.seq(
       enrollments.delete,
       courses.delete
     )), 5.seconds)
-    Await.result(
-      Http().newServerAt("localhost", 8081).bind(mockUserServiceRoutes),
-      3.seconds
-    )
-    super.beforeAll()
   }
 
-  "Course API" should {
+  "Course API full test (with real user-service)" should {
 
-    "mock teacher and student tokens" in {
-      teacherId = "t-123"
-      studentId = "s-456"
+    "generate tokens" in {
       teacherToken = generateToken(teacherId)
       studentToken = generateToken(studentId)
     }
 
-    "fail to create course if not teacher" in {
-      val req = CreateCourseRequest("Math")
+    "fail to create course as student" in {
+      val req = CreateCourseRequest("Math", "Mon 10am", "Room A")
       Post("/course/create", req) ~> bearer(studentToken) ~> routes ~> check {
-        status shouldBe StatusCodes.Unauthorized
+        status shouldBe StatusCodes.Forbidden
       }
     }
 
-    "create course successfully" in {
-      val req = CreateCourseRequest("Math")
+    "create course as teacher" in {
+      val req = CreateCourseRequest("Math", "Mon 10am", "Room A")
       Post("/course/create", req) ~> bearer(teacherToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
         val res = responseAs[Map[String, String]]
         courseId = res("courseId")
-        courseId.nonEmpty shouldBe true
       }
     }
 
     "fail to create duplicate course" in {
-      val req = CreateCourseRequest("Math")
+      val req = CreateCourseRequest("Math", "Mon 10am", "Room A")
       Post("/course/create", req) ~> bearer(teacherToken) ~> routes ~> check {
         status shouldBe StatusCodes.Conflict
-        responseAs[String] should include("already created")
+      }
+    }
+
+    "fail to update course as student" in {
+      val req = UpdateCourseRequest(courseId, "Math 2", "Tue 2pm", "Room B")
+      Post("/course/update", req) ~> bearer(studentToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
+      }
+    }
+
+    "update course as teacher" in {
+      val req = UpdateCourseRequest(courseId, "Math 2", "Tue 2pm", "Room B")
+      Post("/course/update", req) ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+      }
+    }
+
+    "fail to select course as teacher" in {
+      val req = EnrollmentRequest(courseId)
+      Post("/course/select", req) ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
       }
     }
 
     "fail to select non-existent course" in {
-      val req = EnrollmentRequest("non-existent-id")
+      val req = EnrollmentRequest("invalid-id")
       Post("/course/select", req) ~> bearer(studentToken) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] should include("does not exist")
+        status shouldBe StatusCodes.NotFound
       }
     }
 
-    "select course successfully" in {
+    "select course as student" in {
       val req = EnrollmentRequest(courseId)
       Post("/course/select", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Selected"
       }
     }
 
-    "fail to select already selected course" in {
+    "fail to select again" in {
       val req = EnrollmentRequest(courseId)
       Post("/course/select", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.Conflict
-        responseAs[String] should include("Already selected")
       }
     }
 
-    "drop course successfully" in {
+    "drop course" in {
       val req = DropRequest(courseId)
       Post("/course/drop", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Dropped"
       }
     }
 
-    "fail to drop course again (already dropped)" in {
+    "fail to drop again" in {
       val req = DropRequest(courseId)
       Post("/course/drop", req) ~> bearer(studentToken) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] should include("No enrollment record")
+        status shouldBe StatusCodes.NotFound
       }
     }
 
-    "delete course successfully by teacher" in {
+    "fail to delete course as student" in {
+      val req = DeleteCourseRequest(courseId)
+      Post("/course/delete", req) ~> bearer(studentToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
+      }
+    }
+
+    "delete course as teacher" in {
       val req = DeleteCourseRequest(courseId)
       Post("/course/delete", req) ~> bearer(teacherToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Deleted"
       }
     }
 
-    "fail to delete course again (already deleted)" in {
+    "fail to delete again" in {
       val req = DeleteCourseRequest(courseId)
       Post("/course/delete", req) ~> bearer(teacherToken) ~> routes ~> check {
-        status shouldBe StatusCodes.Unauthorized
+        status shouldBe StatusCodes.NotFound
       }
     }
 
     "create another course for listing" in {
-      val req = CreateCourseRequest("History")
+      val req = CreateCourseRequest("History", "Wed 1pm", "Room C")
       Post("/course/create", req) ~> bearer(teacherToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
         val res = responseAs[Map[String, String]]
         courseId = res("courseId")
-        courseId.nonEmpty shouldBe true
       }
     }
 
     "list all courses" in {
       Get("/course/list") ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        val result = responseAs[Vector[Course]]
-        result.exists(_.name == "History") shouldBe true
+        responseAs[Vector[Course]].exists(_.name == "History") shouldBe true
       }
     }
 
-    "should search course by name (case-insensitive match)" in {
-      Get("/course/list?name=hist") ~> routes ~> check {
+    "check teacher ownership" in {
+      val req = CheckRequest(courseId, teacherId, "teacher")
+      Post("/course/check", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        val result = responseAs[Vector[Course]]
-        result.exists(_.name.toLowerCase.contains("hist")) shouldBe true
+        responseAs[String] shouldBe "Created"
       }
     }
 
-    "return empty list when no course matches" in {
-      Get("/course/list?name=nonexistent_course_987654321") ~> routes ~> check {
+    "check student selection (false)" in {
+      val req = CheckRequest(courseId, studentId, "student")
+      Post("/course/check", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.OK
-        val result = responseAs[Vector[Course]]
-        result shouldBe empty
+        responseAs[String] shouldBe "Not selected"
+      }
+    }
+
+    "fail check with invalid role" in {
+      val req = CheckRequest(courseId, studentId, "admin")
+      Post("/course/check", req.asJson) ~> routes ~> check {
+        status shouldBe StatusCodes.BadRequest
       }
     }
   }

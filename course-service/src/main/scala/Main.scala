@@ -7,173 +7,124 @@ import akka.http.scaladsl.server.{ExceptionHandler, Route}
 import akka.http.scaladsl.server.Directives._
 import akka.stream.Materializer
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
+import io.circe.parser._
 import io.circe.generic.auto._
 import io.circe.syntax._
-import io.circe.parser._
-import pdi.jwt.{JwtAlgorithm, JwtCirce}
 import slick.jdbc.PostgresProfile.api._
-import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContextExecutor, Future}
+import scala.concurrent.duration._
 import scala.util.{Failure, Success}
 
-case class Course(id: String, name: String, teacherId: String)
-case class Enrollment(studentId: String, courseId: String)
+case class Course(id: String, name: String, uid: String, teacherName: String, time: String, location: String)
+case class Enrollment(uid: String, courseId: String)
 
-case class CreateCourseRequest(name: String)
+case class CreateCourseRequest(name: String, time: String, location: String)
+case class UpdateCourseRequest(courseId: String, name: String, time: String, location: String)
 case class DeleteCourseRequest(courseId: String)
 case class EnrollmentRequest(courseId: String)
 case class DropRequest(courseId: String)
+case class CheckRequest(courseId: String, uid: String, role: String)
 
 class CourseTable(tag: Tag) extends Table[Course](tag, "courses") {
-  def id        = column[String]("id", O.PrimaryKey)
-  def name      = column[String]("name")
-  def teacherId = column[String]("teacher_id")
-  def * = (id, name, teacherId) <> (Course.tupled, Course.unapply)
+  def id = column[String]("id", O.PrimaryKey)
+  def name = column[String]("name")
+  def uid = column[String]("uid")
+  def teacherName = column[String]("teacher_name")
+  def time = column[String]("time")
+  def location = column[String]("location")
+  def * = (id, name, uid, teacherName, time, location) <> (Course.tupled, Course.unapply)
 }
 
 class EnrollmentTable(tag: Tag) extends Table[Enrollment](tag, "enrollments") {
-  def studentId = column[String]("student_id")
-  def courseId  = column[String]("course_id")
-  def *         = (studentId, courseId) <> (Enrollment.tupled, Enrollment.unapply)
-  def pk        = primaryKey("pk_enrollment", (studentId, courseId))
-  def courseFk  = foreignKey("fk_course", courseId, Main.courses)(_.id, onDelete = ForeignKeyAction.Cascade)
+  def uid = column[String]("uid")
+  def courseId = column[String]("course_id")
+  def * = (uid, courseId) <> (Enrollment.tupled, Enrollment.unapply)
+  def pk = primaryKey("pk_enrollment", (uid, courseId))
+  def courseFk = foreignKey("fk_course", courseId, Main.courses)(_.id, onDelete = ForeignKeyAction.Cascade)
 }
 
 object Main {
-  implicit val system: ActorSystem          = ActorSystem("course-system")
-  implicit val materializer: Materializer   = Materializer(system)
+  implicit val system: ActorSystem = ActorSystem("course-system")
+  implicit val materializer: Materializer = Materializer(system)
   implicit val ec: ExecutionContextExecutor = system.dispatcher
 
-  val db          = Database.forConfig("db")
-  val courses     = TableQuery[CourseTable]
+  val db = Database.forConfig("db")
+  val courses = TableQuery[CourseTable]
   val enrollments = TableQuery[EnrollmentTable]
 
-  private val jwtKey      = "secret"
+  private val userUidUrl = "http://localhost:8081/user/uid"
   private val userInfoUrl = "http://localhost:8081/user/info"
 
-  def verifyToken(token: String): Option[String] =
-    JwtCirce.decode(token.stripPrefix("Bearer ").trim, jwtKey, Seq(JwtAlgorithm.HS256)).toOption.flatMap(_.subject)
-
-  def validateRole(uid: String, role: String, token: String): Future[Boolean] = {
-    val uri         = Uri(userInfoUrl).withQuery(Uri.Query("uid" -> uid))
-    val httpRequest = HttpRequest(uri = uri).withHeaders(headers.RawHeader("Authorization", token))
-    Http().singleRequest(httpRequest).flatMap { response =>
-      if (response.status == StatusCodes.OK) {
-        response.entity.toStrict(3.seconds).map { entity =>
-          val jsonStr = entity.data.utf8String
-          val roleMatch = parse(jsonStr).flatMap(_.hcursor.downField("type").as[String]) match {
-            case Right(tpe) => tpe == role.toLowerCase
-            case _          => false
-          }
-          roleMatch
+  def extractUidAndRole(token: String): Future[Option[(String, String, String)]] = {
+    val req = HttpRequest(uri = userUidUrl).withHeaders(headers.RawHeader("Authorization", token))
+    Http().singleRequest(req).flatMap { res =>
+      if (res.status != StatusCodes.OK) Future.successful(None)
+      else res.entity.toStrict(3.seconds).flatMap { entity =>
+        val uidOpt = parse(entity.data.utf8String).flatMap(_.hcursor.get[String]("uid")).toOption
+        uidOpt match {
+          case Some(uid) =>
+            val infoReq = HttpRequest(uri = Uri(userInfoUrl).withQuery(Uri.Query("uid" -> uid)))
+            Http().singleRequest(infoReq).flatMap { infoRes =>
+              if (infoRes.status != StatusCodes.OK) Future.successful(None)
+              else infoRes.entity.toStrict(3.seconds).map { ent =>
+                val json = parse(ent.data.utf8String).getOrElse(io.circe.Json.Null)
+                val role = json.hcursor.get[String]("type").getOrElse("")
+                val name = json.hcursor.get[String]("name").getOrElse("")
+                Some((uid, role, name))
+              }
+            }
+          case None => Future.successful(None)
         }
-      } else Future.successful(false)
+      }
     }
   }
 
-  implicit val exceptionHandler: ExceptionHandler =
-    ExceptionHandler { case ex => complete(StatusCodes.InternalServerError -> ex.getMessage) }
+  implicit val exceptionHandler: ExceptionHandler = ExceptionHandler {
+    case ex => complete(StatusCodes.InternalServerError -> ex.getMessage)
+  }
 
   val routes: Route = handleExceptions(exceptionHandler) {
     pathPrefix("course") {
-      path("list") {
-        get {
-          parameter("name".?) { nameOpt =>
-            val query = nameOpt match {
-              case Some(keyword) =>
-                courses.filter(_.name.toLowerCase like s"%${keyword.toLowerCase}%")
-              case None =>
-                courses
-            }
-            onComplete(db.run(query.result)) {
-              case Success(result) => complete(result.asJson)
-              case Failure(ex)     => throw ex
-            }
-          }
-        }
-      } ~
       headerValueByName("Authorization") { auth =>
-        val uidOpt = verifyToken(auth)
         concat(
           path("create") {
             post {
               entity(as[CreateCourseRequest]) { req =>
-                uidOpt match {
-                  case Some(uid) =>
-                    onComplete(validateRole(uid, "teacher", auth)) {
-                      case Success(true) =>
-                        val checkExist = courses.filter(c => c.name === req.name && c.teacherId === uid).exists.result
-                        onComplete(db.run(checkExist)) {
-                          case Success(true)  => complete(StatusCodes.Conflict -> "You have already created this course")
-                          case Success(false) =>
-                            val id = java.util.UUID.randomUUID().toString
-                            onComplete(db.run(courses += Course(id, req.name, uid))) {
-                              case Success(_)  => complete(StatusCodes.OK -> Map("courseId" -> id))
-                              case Failure(ex) => throw ex
-                            }
+                onComplete(extractUidAndRole(auth)) {
+                  case Success(Some((uid, "teacher", name))) =>
+                    val exists = courses.filter(c => c.uid === uid && c.name === req.name).exists.result
+                    onComplete(db.run(exists)) {
+                      case Success(true) => complete(StatusCodes.Conflict -> "Course name already exists")
+                      case Success(false) =>
+                        val id = java.util.UUID.randomUUID().toString
+                        val insert = courses += Course(id, req.name, uid, name, req.time, req.location)
+                        onComplete(db.run(insert)) {
+                          case Success(_) => complete(StatusCodes.OK -> Map("courseId" -> id))
                           case Failure(ex) => throw ex
                         }
-                      case _ => complete(StatusCodes.Unauthorized)
+                      case Failure(ex) => throw ex
                     }
-                  case None => complete(StatusCodes.Unauthorized)
+                  case Success(Some((_, role, _))) =>
+                    complete(StatusCodes.Forbidden -> s"$role not allowed to create courses")
+                  case _ => complete(StatusCodes.Unauthorized)
                 }
               }
             }
           },
-          path("select") {
+          path("update") {
             post {
-              entity(as[EnrollmentRequest]) { req =>
-                uidOpt match {
-                  case Some(uid) =>
-                    onComplete(validateRole(uid, "student", auth)) {
-                      case Success(true) =>
-                        val checkSelected    = enrollments.filter(e => e.studentId === uid && e.courseId === req.courseId).exists.result
-                        val checkCourseExist = courses.filter(_.id === req.courseId).exists.result
-                        val action =
-                          checkCourseExist.flatMap { courseExists =>
-                            if (!courseExists)
-                              DBIO.failed(new Exception("Course not found"))
-                            else {
-                              checkSelected.flatMap { alreadySelected =>
-                                if (alreadySelected)
-                                  DBIO.failed(new Exception("Already selected"))
-                                else
-                                  enrollments += Enrollment(uid, req.courseId)
-                              }
-                            }
-                          }
-                        onComplete(db.run(action.transactionally)) {
-                          case Success(_) => complete("Selected")
-                          case Failure(e) =>
-                            if (e.getMessage == "Course not found")
-                              complete(StatusCodes.BadRequest -> "Course does not exist")
-                            else if (e.getMessage == "Already selected")
-                              complete(StatusCodes.Conflict -> "Already selected")
-                            else throw e
-                        }
-                      case _ => complete(StatusCodes.Unauthorized)
+              entity(as[UpdateCourseRequest]) { req =>
+                onComplete(extractUidAndRole(auth)) {
+                  case Success(Some((uid, "teacher", _))) =>
+                    val q = courses.filter(c => c.id === req.courseId && c.uid === uid)
+                      .map(c => (c.name, c.time, c.location))
+                      .update((req.name, req.time, req.location))
+                    onComplete(db.run(q)) {
+                      case Success(0) => complete(StatusCodes.NotFound -> "Course not found or not owned")
+                      case Success(_) => complete("Updated")
+                      case Failure(e) => throw e
                     }
-                  case None => complete(StatusCodes.Unauthorized)
-                }
-              }
-            }
-          },
-          path("drop") {
-            post {
-              entity(as[DropRequest]) { req =>
-                uidOpt match {
-                  case Some(uid) =>
-                    onComplete(validateRole(uid, "student", auth)) {
-                      case Success(true) =>
-                        onComplete(db.run(enrollments.filter(e =>
-                          e.studentId === uid && e.courseId === req.courseId).delete)) {
-                          case Success(0) => complete(StatusCodes.BadRequest -> "No enrollment record")
-                          case Success(_) => complete("Dropped")
-                          case Failure(e) => throw e
-                        }
-                      case _ => complete(StatusCodes.Unauthorized)
-                    }
-                  case None => complete(StatusCodes.Unauthorized)
+                  case _ => complete(StatusCodes.Forbidden)
                 }
               }
             }
@@ -181,24 +132,94 @@ object Main {
           path("delete") {
             post {
               entity(as[DeleteCourseRequest]) { req =>
-                uidOpt match {
-                  case Some(uid) =>
-                    onComplete(validateRole(uid, "teacher", auth)) {
-                      case Success(true) =>
-                        onComplete(db.run(courses.filter(c =>
-                          c.id === req.courseId && c.teacherId === uid).delete)) {
-                          case Success(0) => complete(StatusCodes.Unauthorized)
-                          case Success(_) => complete("Deleted")
-                          case Failure(e) => throw e
-                        }
-                      case _ => complete(StatusCodes.Unauthorized)
+                onComplete(extractUidAndRole(auth)) {
+                  case Success(Some((uid, "teacher", _))) =>
+                    val q = courses.filter(c => c.id === req.courseId && c.uid === uid).delete
+                    onComplete(db.run(q)) {
+                      case Success(0) => complete(StatusCodes.NotFound -> "Course not found or not owned")
+                      case Success(_) => complete("Deleted")
+                      case Failure(e) => throw e
                     }
-                  case None => complete(StatusCodes.Unauthorized)
+                  case _ => complete(StatusCodes.Forbidden)
+                }
+              }
+            }
+          },
+          path("select") {
+            post {
+              entity(as[EnrollmentRequest]) { req =>
+                onComplete(extractUidAndRole(auth)) {
+                  case Success(Some((uid, "student", _))) =>
+                    val courseExists = courses.filter(_.id === req.courseId).exists.result
+                    val alreadySelected = enrollments.filter(e => e.uid === uid && e.courseId === req.courseId).exists.result
+                    val action = for {
+                      exists <- DBIO.sequence(Seq(courseExists, alreadySelected))
+                      result <- if (!exists(0)) DBIO.failed(new Exception("Course not found"))
+                                else if (exists(1)) DBIO.failed(new Exception("Already selected"))
+                                else enrollments += Enrollment(uid, req.courseId)
+                    } yield result
+                    onComplete(db.run(action.transactionally)) {
+                      case Success(_) => complete("Selected")
+                      case Failure(e) if e.getMessage == "Course not found" => complete(StatusCodes.NotFound -> e.getMessage)
+                      case Failure(e) if e.getMessage == "Already selected" => complete(StatusCodes.Conflict -> e.getMessage)
+                      case Failure(e) => throw e
+                    }
+                  case _ => complete(StatusCodes.Forbidden)
+                }
+              }
+            }
+          },
+          path("drop") {
+            post {
+              entity(as[DropRequest]) { req =>
+                onComplete(extractUidAndRole(auth)) {
+                  case Success(Some((uid, "student", _))) =>
+                    val del = enrollments.filter(e => e.uid === uid && e.courseId === req.courseId).delete
+                    onComplete(db.run(del)) {
+                      case Success(0) => complete(StatusCodes.NotFound -> "No enrollment record")
+                      case Success(_) => complete("Dropped")
+                      case Failure(e) => throw e
+                    }
+                  case _ => complete(StatusCodes.Forbidden)
                 }
               }
             }
           }
         )
+      } ~
+      path("list") {
+        get {
+          onComplete(db.run(courses.result)) {
+            case Success(result) => complete(result.asJson)
+            case Failure(ex) => throw ex
+          }
+        }
+      } ~
+      path("check") {
+        post {
+          entity(as[CheckRequest]) { req =>
+            req.role match {
+              case "student" =>
+                val q = enrollments.filter(e => e.uid === req.uid && e.courseId === req.courseId).exists.result
+                onComplete(db.run(q)) {
+                  case Success(true) => complete("Selected")
+                  case Success(false) => complete("Not selected")
+                  case Failure(e) => throw e
+                }
+
+              case "teacher" =>
+                val q = courses.filter(c => c.id === req.courseId && c.uid === req.uid).exists.result
+                onComplete(db.run(q)) {
+                  case Success(true) => complete("Created")
+                  case Success(false) => complete("Not created")
+                  case Failure(e) => throw e
+                }
+
+              case _ =>
+                complete(StatusCodes.BadRequest -> "Invalid role")
+            }
+          }
+        }
       }
     }
   }

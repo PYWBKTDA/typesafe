@@ -1,11 +1,4 @@
-# Scala
 .metals/
 .bsp/
 target/
-
-# VSCode
 .vscode/
-
-# Node
-node_modules/
-dist/

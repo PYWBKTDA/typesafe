@@ -65,5 +65,5 @@ ON CONFLICT (uid) DO NOTHING;
 XXX-service/src/main/scala/Main.scala中实现了api
 
 - user/register、login、update、uid、info
-- course/create、select、drop、delete、list、check
+- course/create、update、delete、select、drop、list、info、check
 

@@ -189,9 +189,28 @@ object Main {
       } ~
       path("list") {
         get {
-          onComplete(db.run(courses.result)) {
-            case Success(result) => complete(result.asJson)
+          onComplete(db.run(courses.map(_.id).result)) {
+            case Success(ids) => complete(ids.asJson)
             case Failure(ex) => throw ex
+          }
+        }
+      } ~
+      path("info") {
+        get {
+          parameter("id") { courseId =>
+            val query = courses.filter(_.id === courseId).result.headOption
+            onComplete(db.run(query)) {
+              case Success(Some(c)) =>
+                val json = Map(
+                  "name" -> c.name,
+                  "teacherName" -> c.teacherName,
+                  "time" -> c.time,
+                  "location" -> c.location
+                ).asJson
+                complete(json)
+              case Success(None) => complete(StatusCodes.NotFound -> "Course not found")
+              case Failure(ex) => throw ex
+            }
           }
         }
       } ~

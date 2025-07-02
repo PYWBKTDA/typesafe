@@ -40,18 +40,11 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
     )), 5.seconds)
   }
 
-  "Course API full test (with real user-service)" should {
+  "Course API full test" should {
 
     "generate tokens" in {
       teacherToken = generateToken(teacherId)
       studentToken = generateToken(studentId)
-    }
-
-    "fail to create course as student" in {
-      val req = CreateCourseRequest("Math", "Mon 10am", "Room A")
-      Post("/course/create", req) ~> bearer(studentToken) ~> routes ~> check {
-        status shouldBe StatusCodes.Forbidden
-      }
     }
 
     "create course as teacher" in {
@@ -63,6 +56,13 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
       }
     }
 
+    "fail to create course as student" in {
+      val req = CreateCourseRequest("Physics", "Tue 2pm", "Room B")
+      Post("/course/create", req) ~> bearer(studentToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
+      }
+    }
+
     "fail to create duplicate course" in {
       val req = CreateCourseRequest("Math", "Mon 10am", "Room A")
       Post("/course/create", req) ~> bearer(teacherToken) ~> routes ~> check {
@@ -70,31 +70,18 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
       }
     }
 
-    "fail to update course as student" in {
-      val req = UpdateCourseRequest(courseId, "Math 2", "Tue 2pm", "Room B")
-      Post("/course/update", req) ~> bearer(studentToken) ~> routes ~> check {
-        status shouldBe StatusCodes.Forbidden
-      }
-    }
-
     "update course as teacher" in {
-      val req = UpdateCourseRequest(courseId, "Math 2", "Tue 2pm", "Room B")
+      val req = UpdateCourseRequest(courseId, "Math 2", "Wed 3pm", "Room C")
       Post("/course/update", req) ~> bearer(teacherToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
+        responseAs[String] shouldBe "Updated"
       }
     }
 
-    "fail to select course as teacher" in {
-      val req = EnrollmentRequest(courseId)
-      Post("/course/select", req) ~> bearer(teacherToken) ~> routes ~> check {
+    "fail to update course as student" in {
+      val req = UpdateCourseRequest(courseId, "Math X", "Fri 1pm", "Room D")
+      Post("/course/update", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.Forbidden
-      }
-    }
-
-    "fail to select non-existent course" in {
-      val req = EnrollmentRequest("invalid-id")
-      Post("/course/select", req) ~> bearer(studentToken) ~> routes ~> check {
-        status shouldBe StatusCodes.NotFound
       }
     }
 
@@ -102,20 +89,38 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
       val req = EnrollmentRequest(courseId)
       Post("/course/select", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
+        responseAs[String] shouldBe "Selected"
       }
     }
 
-    "fail to select again" in {
+    "fail to select course again" in {
       val req = EnrollmentRequest(courseId)
       Post("/course/select", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.Conflict
+        responseAs[String] shouldBe "Already selected"
       }
     }
 
-    "drop course" in {
+    "fail to select as teacher" in {
+      val req = EnrollmentRequest(courseId)
+      Post("/course/select", req) ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
+      }
+    }
+
+    "fail to select non-existent course" in {
+      val req = EnrollmentRequest("non-existent")
+      Post("/course/select", req) ~> bearer(studentToken) ~> routes ~> check {
+        status shouldBe StatusCodes.NotFound
+        responseAs[String] shouldBe "Course not found"
+      }
+    }
+
+    "drop course as student" in {
       val req = DropRequest(courseId)
       Post("/course/drop", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.OK
+        responseAs[String] shouldBe "Dropped"
       }
     }
 
@@ -123,43 +128,14 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
       val req = DropRequest(courseId)
       Post("/course/drop", req) ~> bearer(studentToken) ~> routes ~> check {
         status shouldBe StatusCodes.NotFound
+        responseAs[String] shouldBe "No enrollment record"
       }
     }
 
-    "fail to delete course as student" in {
-      val req = DeleteCourseRequest(courseId)
-      Post("/course/delete", req) ~> bearer(studentToken) ~> routes ~> check {
+    "fail to drop as teacher" in {
+      val req = DropRequest(courseId)
+      Post("/course/drop", req) ~> bearer(teacherToken) ~> routes ~> check {
         status shouldBe StatusCodes.Forbidden
-      }
-    }
-
-    "delete course as teacher" in {
-      val req = DeleteCourseRequest(courseId)
-      Post("/course/delete", req) ~> bearer(teacherToken) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-      }
-    }
-
-    "fail to delete again" in {
-      val req = DeleteCourseRequest(courseId)
-      Post("/course/delete", req) ~> bearer(teacherToken) ~> routes ~> check {
-        status shouldBe StatusCodes.NotFound
-      }
-    }
-
-    "create another course for listing" in {
-      val req = CreateCourseRequest("History", "Wed 1pm", "Room C")
-      Post("/course/create", req) ~> bearer(teacherToken) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val res = responseAs[Map[String, String]]
-        courseId = res("courseId")
-      }
-    }
-
-    "list all courses" in {
-      Get("/course/list") ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        responseAs[Vector[Course]].exists(_.name == "History") shouldBe true
       }
     }
 
@@ -179,10 +155,56 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
       }
     }
 
-    "fail check with invalid role" in {
+    "check invalid role" in {
       val req = CheckRequest(courseId, studentId, "admin")
       Post("/course/check", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.BadRequest
+        responseAs[String] shouldBe "Invalid role"
+      }
+    }
+
+    "get course info" in {
+      Get(s"/course/info?id=$courseId") ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+        val map = responseAs[Map[String, String]]
+        map("name") shouldBe "Math 2"
+      }
+    }
+
+    "fail to get info for unknown id" in {
+      Get(s"/course/info?id=unknown") ~> routes ~> check {
+        status shouldBe StatusCodes.NotFound
+        responseAs[String] shouldBe "Course not found"
+      }
+    }
+
+    "get course list" in {
+      Get("/course/list") ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+        responseAs[Vector[String]].contains(courseId) shouldBe true
+      }
+    }
+
+    "delete course as teacher" in {
+      val req = DeleteCourseRequest(courseId)
+      Post("/course/delete", req) ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+        responseAs[String] shouldBe "Deleted"
+      }
+    }
+
+    "fail to delete again" in {
+      val req = DeleteCourseRequest(courseId)
+      Post("/course/delete", req) ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.NotFound
+        responseAs[String] shouldBe "Course not found or not owned"
+      }
+    }
+
+    "fail to delete as student" in {
+      val req = DeleteCourseRequest(courseId)
+      Post("/course/delete", req) ~> bearer(studentToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
       }
     }
   }

@@ -207,5 +207,50 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
         status shouldBe StatusCodes.Forbidden
       }
     }
+    
+    "create course and enroll student for students listing" in {
+      val req = CreateCourseRequest("Chemistry", "Thu 9am", "Room E")
+      Post("/course/create", req) ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+        val res = responseAs[Map[String, String]]
+        courseId = res("courseId")
+      }
+
+      val enrollReq = EnrollmentRequest(courseId)
+      Post("/course/select", enrollReq) ~> bearer(studentToken) ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+      }
+    }
+
+    "teacher lists student uids for their course" in {
+      Get(s"/course/students?courseId=$courseId") ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+        val uids = responseAs[Vector[String]]
+        uids should contain (studentId)
+      }
+    }
+
+    "student should not access student list" in {
+      Get(s"/course/students?courseId=$courseId") ~> bearer(studentToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
+      }
+    }
+
+    "teacher cannot access students of another teacher's course" in {
+      val anotherTeacherToken = generateToken("t-another")
+      val req = CreateCourseRequest("Biology", "Fri 8am", "Room F")
+      var otherCourseId = ""
+
+      Post("/course/create", req) ~> bearer(anotherTeacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.OK
+        val res = responseAs[Map[String, String]]
+        otherCourseId = res("courseId")
+      }
+
+      Get(s"/course/students?courseId=$otherCourseId") ~> bearer(teacherToken) ~> routes ~> check {
+        status shouldBe StatusCodes.Forbidden
+        responseAs[String] shouldBe "Not the course owner"
+      }
+    }
   }
 }

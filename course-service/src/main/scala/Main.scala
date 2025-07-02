@@ -264,7 +264,30 @@ object Main {
             }
           }
         }
-      }
+      } ~
+      path("students") {
+        get {
+          headerValueByName("Authorization") { auth =>
+            parameter("courseId") { courseId =>
+              onComplete(extractUidAndRole(auth)) {
+                case Success(Some((uid, "teacher", _))) =>
+                  val owned = courses.filter(c => c.id === courseId && c.uid === uid).exists.result
+                  onComplete(db.run(owned)) {
+                    case Success(true) =>
+                      val q = enrollments.filter(_.courseId === courseId).map(_.uid).result
+                      onComplete(db.run(q)) {
+                        case Success(uids) => complete(uids.asJson)
+                        case Failure(e) => throw e
+                      }
+                    case Success(false) => complete(StatusCodes.Forbidden -> "Not the course owner")
+                    case Failure(e) => throw e
+                  }
+                case _ => complete(StatusCodes.Forbidden)
+              }
+            }
+          }
+        }
+      } 
     }
   }
 }

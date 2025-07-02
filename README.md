@@ -60,10 +60,19 @@ VALUES (
   '{"studentId": "s-456", "name": "S", "department": "CS", "type": "student"}'
 )
 ON CONFLICT (uid) DO NOTHING;
+
+INSERT INTO users (uid, username, password, info)
+VALUES (
+  't-another',
+  'teacher2',
+  '$2a$10$PBdfjv8HAcNEaRbGU6X6eO0zjtaC8owYi62kp4hAlE14NKssKRBV6',
+  '{"teacherId": "t-another", "name": "T2", "department": "Math", "type": "teacher"}'
+)
+ON CONFLICT (uid) DO NOTHING;
 ```
 
 XXX-service/src/main/scala/Main.scala中实现了api
 
 - user/register、login、update、uid、info
-- course/create、update、delete、select、drop、list、info、check
+- course/create、update、delete、select、drop、list、info、check、students
 

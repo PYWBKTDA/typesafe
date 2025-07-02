@@ -23,7 +23,7 @@ case class UpdateCourseRequest(courseId: String, name: String, time: String, loc
 case class DeleteCourseRequest(courseId: String)
 case class EnrollmentRequest(courseId: String)
 case class DropRequest(courseId: String)
-case class CheckRequest(courseId: String, uid: String, role: String)
+case class CheckRequest(courseId: String, uid: String)
 
 class CourseTable(tag: Tag) extends Table[Course](tag, "courses") {
   def id = column[String]("id", O.PrimaryKey)
@@ -150,20 +150,25 @@ object Main {
               entity(as[EnrollmentRequest]) { req =>
                 onComplete(extractUidAndRole(auth)) {
                   case Success(Some((uid, "student", _))) =>
-                    val courseExists = courses.filter(_.id === req.courseId).exists.result
-                    val alreadySelected = enrollments.filter(e => e.uid === uid && e.courseId === req.courseId).exists.result
-                    val action = for {
-                      exists <- DBIO.sequence(Seq(courseExists, alreadySelected))
-                      result <- if (!exists(0)) DBIO.failed(new Exception("Course not found"))
-                                else if (exists(1)) DBIO.failed(new Exception("Already selected"))
-                                else enrollments += Enrollment(uid, req.courseId)
-                    } yield result
-                    onComplete(db.run(action.transactionally)) {
+                    val courseExistsF = db.run(courses.filter(_.id === req.courseId).exists.result)
+                    val alreadySelectedF = db.run(enrollments.filter(e => e.uid === uid && e.courseId === req.courseId).exists.result)
+
+                    onComplete(courseExistsF.flatMap { courseExists =>
+                      if (!courseExists) {
+                        Future.failed(new Exception("Course not found"))
+                      } else {
+                        alreadySelectedF.flatMap { selected =>
+                          if (selected) Future.failed(new Exception("Already selected"))
+                          else db.run(enrollments += Enrollment(uid, req.courseId))
+                        }
+                      }
+                    }) {
                       case Success(_) => complete("Selected")
                       case Failure(e) if e.getMessage == "Course not found" => complete(StatusCodes.NotFound -> e.getMessage)
                       case Failure(e) if e.getMessage == "Already selected" => complete(StatusCodes.Conflict -> e.getMessage)
                       case Failure(e) => throw e
                     }
+
                   case _ => complete(StatusCodes.Forbidden)
                 }
               }
@@ -217,25 +222,45 @@ object Main {
       path("check") {
         post {
           entity(as[CheckRequest]) { req =>
-            req.role match {
-              case "student" =>
-                val q = enrollments.filter(e => e.uid === req.uid && e.courseId === req.courseId).exists.result
-                onComplete(db.run(q)) {
-                  case Success(true) => complete("Selected")
-                  case Success(false) => complete("Not selected")
-                  case Failure(e) => throw e
+            val infoUrl = Uri(Main.userInfoUrl).withQuery(Uri.Query("uid" -> req.uid))
+            val infoReq = HttpRequest(uri = infoUrl)
+            onComplete(Http().singleRequest(infoReq)) {
+              case Success(res) if res.status == StatusCodes.OK =>
+                onComplete(res.entity.toStrict(3.seconds)) {
+                  case Success(strictEntity) =>
+                    val json = parse(strictEntity.data.utf8String).getOrElse(io.circe.Json.Null)
+                    val role = json.hcursor.get[String]("type").getOrElse("")
+
+                    role match {
+                      case "student" =>
+                        val q = enrollments.filter(e => e.uid === req.uid && e.courseId === req.courseId).exists.result
+                        onComplete(db.run(q)) {
+                          case Success(true) => complete("Selected")
+                          case Success(false) => complete("Not selected")
+                          case Failure(e) => throw e
+                        }
+
+                      case "teacher" =>
+                        val q = courses.filter(c => c.id === req.courseId && c.uid === req.uid).exists.result
+                        onComplete(db.run(q)) {
+                          case Success(true) => complete("Created")
+                          case Success(false) => complete("Not created")
+                          case Failure(e) => throw e
+                        }
+
+                      case _ =>
+                        complete(StatusCodes.BadRequest -> "Invalid role")
+                    }
+
+                  case Failure(e) =>
+                    throw e
                 }
 
-              case "teacher" =>
-                val q = courses.filter(c => c.id === req.courseId && c.uid === req.uid).exists.result
-                onComplete(db.run(q)) {
-                  case Success(true) => complete("Created")
-                  case Success(false) => complete("Not created")
-                  case Failure(e) => throw e
-                }
+              case Success(res) =>
+                complete(StatusCodes.NotFound -> "User not found")
 
-              case _ =>
-                complete(StatusCodes.BadRequest -> "Invalid role")
+              case Failure(e) =>
+                throw e
             }
           }
         }

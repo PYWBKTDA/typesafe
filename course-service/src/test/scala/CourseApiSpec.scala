@@ -140,7 +140,7 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
     }
 
     "check teacher ownership" in {
-      val req = CheckRequest(courseId, teacherId, "teacher")
+      val req = CheckRequest(courseId, teacherId)
       Post("/course/check", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.OK
         responseAs[String] shouldBe "Created"
@@ -148,18 +148,18 @@ class CourseApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest wi
     }
 
     "check student selection (false)" in {
-      val req = CheckRequest(courseId, studentId, "student")
+      val req = CheckRequest(courseId, studentId)
       Post("/course/check", req.asJson) ~> routes ~> check {
         status shouldBe StatusCodes.OK
         responseAs[String] shouldBe "Not selected"
       }
     }
 
-    "check invalid role" in {
-      val req = CheckRequest(courseId, studentId, "admin")
+    "check unknown uid" in {
+      val req = CheckRequest(courseId, "nonexistent-uid")
       Post("/course/check", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Invalid role"
+        status shouldBe StatusCodes.NotFound
+        responseAs[String] shouldBe "User not found"
       }
     }
 

@@ -1,215 +1,349 @@
 package user
 
-import akka.http.scaladsl.model._
-import akka.http.scaladsl.model.headers.RawHeader
-import akka.http.scaladsl.testkit.ScalatestRouteTest
-import akka.http.scaladsl.server.Route
-import io.circe.generic.auto._
-import io.circe.Json
+import cats.effect._
+import com.typesafe.config.ConfigFactory
+import org.http4s._
+import org.http4s.implicits._
+import org.http4s.circe._
+import munit.CatsEffectSuite
 import io.circe.syntax._
-import io.circe.parser._
-import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpec
-import org.scalatest.BeforeAndAfterAll
-import pdi.jwt.{JwtClaim, JwtCirce, JwtAlgorithm}
-import slick.jdbc.PostgresProfile.api._
+import io.circe.Json
+import io.circe.generic.auto._
+import user.Codecs._
+import org.typelevel.ci._
+import java.util.Properties
+import doobie.Transactor
 
-import scala.concurrent.Await
-import scala.concurrent.duration._
+class UserApiSpec extends CatsEffectSuite {
 
-class UserApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterAll {
+  private val cfg = ConfigFactory.load().getConfig("db")
+  private val props = new Properties()
+  props.setProperty("user", cfg.getString("user"))
+  props.setProperty("password", cfg.getString("password"))
 
-  val routes: Route = Main.routes
+  val transactor: Resource[IO, Transactor[IO]] =
+    Resource.pure(
+      Transactor.fromDriverManager[IO](
+        cfg.getString("driver"),
+        cfg.getString("url"),
+        props,
+        None
+      )
+    )
 
-  var token: String = ""
-  var uid: String = ""
-  val username = "testuser"
+  val password = "123456"
+  val tokenService = new JwtUtil
 
-  override def beforeAll(): Unit = {
-    val db = Main.db
-    val users = Main.users
-    Await.result(db.run(users.delete), 5.seconds)
+  def withApp(testFn: HttpApp[IO] => IO[Unit]): IO[Unit] =
+    transactor.use { xa =>
+      val repo = new UserRepo(xa)
+      val service = new UserService(repo, tokenService)
+      val routes = new UserRoutes(service).httpApp
+      testFn(routes)
+    }
+
+  def extract(json: Json, key: String): String =
+    json.hcursor.get[String](key).getOrElse("")
+
+  def registerAndLogin(username: String)(routes: HttpApp[IO]): IO[(String, String)] = {
+    val register = RegisterRequest(username, password, password, Student("S001", "User", "CS"))
+    val login = LoginRequest(username, password)
+    val registerReq = Request[IO](Method.POST, uri"/user/register").withEntity(register.asJson)
+    val loginReq = Request[IO](Method.POST, uri"/user/login").withEntity(login.asJson)
+
+    for {
+      _ <- routes.run(registerReq)
+      loginResp <- routes.run(loginReq)
+      json <- loginResp.as[Json]
+      Right(token) = json.hcursor.downField("data").downField("token").as[String]
+      Right(uid) = tokenService.verify(token)
+    } yield (token, uid)
   }
 
-  "User API" should {
+  test("register successfully") {
+    val username = s"user_${System.currentTimeMillis()}"
+    val req = RegisterRequest(username, password, password, Student("S001", "User", "CS"))
+    val request = Request[IO](Method.POST, uri"/user/register").withEntity(req.asJson)
+    withApp { routes =>
+      for {
+        resp <- routes.run(request)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.Ok)
+        _ = assertEquals(extract(json, "message"), "Registered")
+      } yield ()
+    }
+  }
 
-    "register a new user successfully" in {
-      val req = RegisterRequest(
-        username,
-        "123456",
-        "123456",
-        Student("S001", "Test User", "CS")
-      )
-      Post("/user/register", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Registered"
+  test("fail to register with duplicate username") {
+    val username = s"user_${System.currentTimeMillis()}"
+    val req = RegisterRequest(username, password, password, Student("S001", "User", "CS"))
+    val request = Request[IO](Method.POST, uri"/user/register").withEntity(req.asJson)
+    withApp { routes =>
+      for {
+        _ <- routes.run(request)
+        resp <- routes.run(request)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.BadRequest)
+        _ = assertEquals(extract(json, "message"), "Username exists")
+      } yield ()
+    }
+  }
+
+  test("fail to register with mismatched passwords") {
+    val req = RegisterRequest("user2", "abc", "xyz", Student("S002", "Mismatch", "Math"))
+    val request = Request[IO](Method.POST, uri"/user/register").withEntity(req.asJson)
+    withApp { routes =>
+      for {
+        resp <- routes.run(request)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.BadRequest)
+        _ = assertEquals(extract(json, "message"), "Passwords do not match")
+      } yield ()
+    }
+  }
+
+  test("fail to register with empty username or password") {
+    val req = RegisterRequest("", "", "", Student("S002", "Empty", "Math"))
+    val request = Request[IO](Method.POST, uri"/user/register").withEntity(req.asJson)
+    withApp { routes =>
+      for {
+        resp <- routes.run(request)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.BadRequest)
+        _ = assertEquals(extract(json, "message"), "Username or password cannot be empty")
+      } yield ()
+    }
+  }
+
+  test("login successfully and get token") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).map { case (token, uid) =>
+        assert(token.nonEmpty)
+        assert(uid.nonEmpty)
       }
     }
+  }
 
-    "fail to register with duplicate username" in {
-      val req = RegisterRequest(
-        username,
-        "123456",
-        "123456",
-        Student("S001", "Test User", "CS")
-      )
-      Post("/user/register", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.Conflict
-        responseAs[String] shouldBe "Username exists"
+  test("fail to login with non-existent username") {
+    val req = LoginRequest("no_user", "password")
+    val request = Request[IO](Method.POST, uri"/user/login").withEntity(req.asJson)
+    withApp { routes =>
+      for {
+        resp <- routes.run(request)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.Unauthorized)
+        _ = assertEquals(extract(json, "message"), "Invalid credentials")
+      } yield ()
+    }
+  }
+
+  test("fail to login with wrong password") {
+    val username = s"user_${System.currentTimeMillis()}"
+    val reg = RegisterRequest(username, password, password, Student("S001", "WrongPass", "CS"))
+    val login = LoginRequest(username, "wrongpass")
+    val regReq = Request[IO](Method.POST, uri"/user/register").withEntity(reg.asJson)
+    val loginReq = Request[IO](Method.POST, uri"/user/login").withEntity(login.asJson)
+    withApp { routes =>
+      for {
+        _ <- routes.run(regReq)
+        resp <- routes.run(loginReq)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.Unauthorized)
+        _ = assertEquals(extract(json, "message"), "Invalid credentials")
+      } yield ()
+    }
+  }
+
+  test("fail to login with empty username and password") {
+    val req = LoginRequest("", "")
+    val request = Request[IO](Method.POST, uri"/user/login").withEntity(req.asJson)
+    withApp { routes =>
+      for {
+        resp <- routes.run(request)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.BadRequest)
+        _ = assertEquals(extract(json, "message"), "Username or password cannot be empty")
+      } yield ()
+    }
+  }
+
+  test("update user info only") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).flatMap { case (token, uid) =>
+        val update = UpdateRequest(None, None, None, Student("S001", "Updated", "AI"))
+        val updateReq = Request[IO](Method.POST, uri"/user/update").withEntity(update.asJson)
+          .putHeaders(Header.Raw(ci"Authorization", s"Bearer $token"))
+        for {
+          resp <- routes.run(updateReq)
+          json <- resp.as[Json]
+          _ = assertEquals(resp.status, Status.Ok)
+          _ = assertEquals(extract(json, "message"), "Info updated")
+        } yield ()
       }
     }
+  }
 
-    "fail to register with mismatched passwords" in {
-      val req = RegisterRequest(
-        "user2",
-        "abc",
-        "xyz",
-        Student("S002", "Mismatch", "Math")
-      )
-      Post("/user/register", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Passwords do not match"
+  test("update user info and password") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).flatMap { case (token, _) =>
+        val update = UpdateRequest(Some(password), Some("newpass"), Some("newpass"), Student("S001", "X", "X"))
+        val req = Request[IO](Method.POST, uri"/user/update").withEntity(update.asJson)
+          .putHeaders(Header.Raw(ci"Authorization", s"Bearer $token"))
+        for {
+          resp <- routes.run(req)
+          json <- resp.as[Json]
+          _ = assertEquals(resp.status, Status.Ok)
+          _ = assertEquals(extract(json, "message"), "Info and password updated")
+        } yield ()
       }
     }
+  }
 
-    "fail to register with empty username or password" in {
-      val req = RegisterRequest(
-        "",
-        "",
-        "",
-        Student("S002", "Empty", "Math")
-      )
-      Post("/user/register", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Username or password cannot be empty"
+  test("fail to update: wrong old password") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).flatMap { case (token, _) =>
+        val update = UpdateRequest(Some("wrong"), Some("x"), Some("x"), Student("S", "X", "X"))
+        val req = Request[IO](Method.POST, uri"/user/update").withEntity(update.asJson)
+          .putHeaders(Header.Raw(ci"Authorization", s"Bearer $token"))
+        for {
+          resp <- routes.run(req)
+          json <- resp.as[Json]
+          _ = assertEquals(resp.status, Status.Unauthorized)
+          _ = assertEquals(extract(json, "message"), "Old password incorrect")
+        } yield ()
       }
     }
+  }
 
-    "login successfully and receive token" in {
-      val req = LoginRequest(username, "123456")
-      Post("/user/login", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val res = responseAs[Map[String, String]]
-        res.contains("token") shouldBe true
-        token = res("token")
-        val claim = JwtCirce.decode(token, "secret", Seq(JwtAlgorithm.HS256)).get
-        uid = claim.subject.get
+  test("fail to update: new password mismatch") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).flatMap { case (token, _) =>
+        val update = UpdateRequest(Some(password), Some("a"), Some("b"), Student("S", "X", "X"))
+        val req = Request[IO](Method.POST, uri"/user/update").withEntity(update.asJson)
+          .putHeaders(Header.Raw(ci"Authorization", s"Bearer $token"))
+        for {
+          resp <- routes.run(req)
+          json <- resp.as[Json]
+          _ = assertEquals(resp.status, Status.BadRequest)
+          _ = assertEquals(extract(json, "message"), "New passwords do not match")
+        } yield ()
       }
     }
+  }
 
-    "fail to login with wrong password" in {
-      val req = LoginRequest(username, "wrongpass")
-      Post("/user/login", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Invalid credentials"
+  test("fail to update: incomplete password fields") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).flatMap { case (token, _) =>
+        val update = UpdateRequest(Some(password), Some("newpass"), None, Student("S", "X", "X"))
+        val req = Request[IO](Method.POST, uri"/user/update").withEntity(update.asJson)
+          .putHeaders(Header.Raw(ci"Authorization", s"Bearer $token"))
+        for {
+          resp <- routes.run(req)
+          json <- resp.as[Json]
+          _ = assertEquals(resp.status, Status.BadRequest)
+          _ = assertEquals(extract(json, "message"), "Incomplete password fields")
+        } yield ()
       }
     }
+  }
 
-    "fail to login with empty username or password" in {
-      val req = LoginRequest("", "")
-      Post("/user/login", req.asJson) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Username or password cannot be empty"
+  test("fail to update: no token") {
+    val update = UpdateRequest(None, None, None, Student("S", "X", "X"))
+    val req = Request[IO](Method.POST, uri"/user/update").withEntity(update.asJson)
+    withApp { routes =>
+      for {
+        resp <- routes.run(req)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.Unauthorized)
+        _ = assertEquals(extract(json, "message"), "No token")
+      } yield ()
+    }
+  }
+
+  test("fail to update: invalid token") {
+    val update = UpdateRequest(None, None, None, Student("S", "X", "X"))
+    val req = Request[IO](Method.POST, uri"/user/update").withEntity(update.asJson)
+      .putHeaders(Header.Raw(ci"Authorization", "Bearer invalid"))
+    withApp { routes =>
+      for {
+        resp <- routes.run(req)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.Unauthorized)
+        _ = assertEquals(extract(json, "message"), "Invalid token")
+      } yield ()
+    }
+  }
+
+  test("get uid from token successfully") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).flatMap { case (token, uid) =>
+        val req = Request[IO](Method.GET, uri"/user/uid").putHeaders(Header.Raw(ci"Authorization", s"Bearer $token"))
+        for {
+          resp <- routes.run(req)
+          json <- resp.as[Json]
+          _ = assertEquals(resp.status, Status.Ok)
+          _ = assertEquals(extract(json.hcursor.downField("data").focus.get, "uid"), uid)
+        } yield ()
       }
     }
+  }
 
-    "update user info only" in {
-      val updateReq = UpdateRequest("", "", "", Student("S001", "New Name", "AI"))
-      Post("/user/update", updateReq.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Info updated"
-      }
+  test("fail to get uid: no token") {
+    val req = Request[IO](Method.GET, uri"/user/uid")
+    withApp { routes =>
+      for {
+        resp <- routes.run(req)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.Unauthorized)
+        _ = assertEquals(extract(json, "message"), "No token")
+      } yield ()
+    }
+  }
 
-      Get(s"/user/info?uid=$uid") ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val name = json.hcursor.downField("name").as[String].getOrElse("")
-        val dept = json.hcursor.downField("department").as[String].getOrElse("")
-        name shouldBe "New Name"
-        dept shouldBe "AI"
+  test("fail to get uid: invalid token") {
+    val req = Request[IO](Method.GET, uri"/user/uid").putHeaders(Header.Raw(ci"Authorization", "Bearer xyz"))
+    withApp { routes =>
+      for {
+        resp <- routes.run(req)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.Unauthorized)
+        _ = assertEquals(extract(json, "message"), "Invalid token")
+      } yield ()
+    }
+  }
+
+  test("get user info successfully") {
+    val username = s"user_${System.currentTimeMillis()}"
+    withApp { routes =>
+      registerAndLogin(username)(routes).flatMap { case (_, uid) =>
+        val req = Request[IO](Method.GET, uri"/user/info".withQueryParam("uid", uid))
+        for {
+          resp <- routes.run(req)
+          json <- resp.as[Json]
+          cursor = json.hcursor.downField("data")
+          _ = assertEquals(resp.status, Status.Ok)
+          _ = assertEquals(cursor.get[String]("name").getOrElse(""), "User")
+        } yield ()
       }
     }
+  }
 
-    "fail to update with missing password fields" in {
-      val req = UpdateRequest("123456", "", "", Student("S001", "Still", "CS"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "Incomplete password fields"
-      }
-    }
-
-    "fail to update password with wrong old password" in {
-      val req = UpdateRequest("wrongold", "abc123", "abc123", Student("S001", "Still", "CS"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Old password incorrect"
-      }
-    }
-
-    "fail to update with mismatched new passwords" in {
-      val req = UpdateRequest("123456", "a", "b", Student("S001", "Still", "CS"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.BadRequest
-        responseAs[String] shouldBe "New passwords do not match"
-      }
-    }
-
-    "update password and info together" in {
-      val req = UpdateRequest("123456", "newpass", "newpass", Student("S001", "Final Name", "Physics"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        responseAs[String] shouldBe "Info and password updated"
-      }
-
-      Get(s"/user/info?uid=$uid") ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val name = json.hcursor.downField("name").as[String].getOrElse("")
-        val dept = json.hcursor.downField("department").as[String].getOrElse("")
-        name shouldBe "Final Name"
-        dept shouldBe "Physics"
-      }
-    }
-
-    "fail to update with bad token" in {
-      val req = UpdateRequest("", "", "", Student("S001", "Again", "Math"))
-      Post("/user/update", req.asJson).withHeaders(RawHeader("Authorization", "bad.token.value")) ~> routes ~> check {
-        status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Invalid token"
-      }
-    }
-
-    "get uid from token using /user/uid" in {
-      Get("/user/uid").withHeaders(RawHeader("Authorization", token)) ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val receivedUid = json.hcursor.downField("uid").as[String].getOrElse("")
-        receivedUid shouldBe uid
-      }
-    }
-
-    "fail to get uid with invalid token" in {
-      Get("/user/uid").withHeaders(RawHeader("Authorization", "bad.token")) ~> routes ~> check {
-        status shouldBe StatusCodes.Unauthorized
-        responseAs[String] shouldBe "Invalid token"
-      }
-    }
-
-    "get user info without token" in {
-      Get(s"/user/info?uid=$uid") ~> routes ~> check {
-        status shouldBe StatusCodes.OK
-        val json = responseAs[Json]
-        val name = json.hcursor.downField("name").as[String].getOrElse("")
-        name shouldBe "Final Name"
-      }
-    }
-
-    "fail to get info for nonexistent uid" in {
-      Get("/user/info?uid=nonexistent") ~> routes ~> check {
-        status shouldBe StatusCodes.NotFound
-        responseAs[String] shouldBe "User not found"
-      }
+  test("fail to get user info for nonexistent uid") {
+    val req = Request[IO](Method.GET, uri"/user/info".withQueryParam("uid", "not_exist"))
+    withApp { routes =>
+      for {
+        resp <- routes.run(req)
+        json <- resp.as[Json]
+        _ = assertEquals(resp.status, Status.NotFound)
+        _ = assertEquals(extract(json, "message"), "User not found")
+      } yield ()
     }
   }
 }

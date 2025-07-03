@@ -1,24 +1,24 @@
-name := "user-service"
+ThisBuild / scalaVersion := "2.13.14"
 
-version := "0.1"
-
-scalaVersion := "2.13.12"
+val http4sVersion = "0.23.23"
+val doobieVersion = "1.0.0-RC4"
+val circeVersion = "0.14.6"
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http" % "10.2.10",
-  "com.typesafe.akka" %% "akka-stream" % "2.6.20",
-  "com.typesafe.akka" %% "akka-actor-typed" % "2.6.20",
-  "de.heikoseeberger" %% "akka-http-circe" % "1.39.2",
-  "io.circe" %% "circe-core" % "0.14.1",
-  "io.circe" %% "circe-generic" % "0.14.1",
-  "io.circe" %% "circe-parser" % "0.14.1",
-  "com.pauldijou" %% "jwt-core" % "5.0.0",
-  "com.pauldijou" %% "jwt-circe" % "5.0.0",
+  "org.typelevel" %% "cats-effect" % "3.5.2",
+  "org.http4s" %% "http4s-dsl" % http4sVersion,
+  "org.http4s" %% "http4s-ember-server" % http4sVersion,
+  "org.http4s" %% "http4s-ember-client" % http4sVersion,
+  "org.http4s" %% "http4s-circe" % http4sVersion,
+  "io.circe" %% "circe-core" % circeVersion,
+  "io.circe" %% "circe-generic" % circeVersion,
+  "io.circe" %% "circe-parser" % circeVersion,
+  "org.tpolecat" %% "doobie-core" % doobieVersion,
+  "org.tpolecat" %% "doobie-hikari" % doobieVersion,
+  "org.tpolecat" %% "doobie-postgres" % doobieVersion,
+  "org.postgresql" % "postgresql" % "42.6.0",
   "com.github.t3hnar" %% "scala-bcrypt" % "4.3.0",
-  "com.typesafe.slick" %% "slick" % "3.3.3",
-  "org.postgresql" % "postgresql" % "42.3.1",
-  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.3",
-  "com.typesafe.akka" %% "akka-http-testkit" % "10.2.10" % Test,
-  "com.typesafe.akka" %% "akka-testkit" % "2.6.20" % Test,
-  "org.scalatest" %% "scalatest" % "3.2.18" % Test
+  "com.github.jwt-scala" %% "jwt-circe" % "9.4.5",
+  "com.typesafe" % "config" % "1.4.3",
+  "org.typelevel" %% "munit-cats-effect" % "2.0.0-M3" % Test
 )

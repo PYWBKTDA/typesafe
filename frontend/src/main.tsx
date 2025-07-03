@@ -1,16 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import CssBaseline from '@mui/material/CssBaseline'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import App from './App';
+import CourseDetail from './CourseDetail';
+import './index.css';
+import CourseManagement from './CourseManagement'; 
 
-const theme = createTheme()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>
-)
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/course/:id" element={<CourseDetail />} />
+        <Route path="/manage" element={<CourseManagement />} />  {/* 新增管理页 */}
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>,
+);

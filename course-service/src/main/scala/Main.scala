@@ -219,6 +219,65 @@ object Main {
           }
         }
       } ~
+      path("mine") {
+				get {
+					headerValueByName("Authorization") { auth =>
+						// 打印收到的 Authorization 头
+						// println(s"[DEBUG] Authorization header: $auth")
+
+						onComplete(extractUidAndRole(auth)) {
+							case Success(Some((uid, role, name))) =>
+								// 打印解析出的用户信息
+								// println(s"[DEBUG] extractUidAndRole => uid: $uid, role: $role, name: $name")
+
+								role match {
+									case "student" =>
+										// println(s"[DEBUG] 执行学生查询分支：uid = $uid")
+										val query = for {
+											e <- enrollments if e.uid === uid
+											c <- courses     if c.id === e.courseId
+										} yield c
+
+										onComplete(db.run(query.result)) {
+											case Success(list) =>
+												// println(s"[DEBUG] student query result size: ${list.size}")
+												complete(list.asJson)
+
+											case Failure(ex) =>
+												// println(s"[ERROR] student query failed: ${ex.getMessage}")
+												throw ex
+										}
+
+									case "teacher" =>
+										// println(s"[DEBUG] 执行教师查询分支：uid = $uid")
+										val query = courses.filter(_.uid === uid)
+
+										onComplete(db.run(query.result)) {
+											case Success(list) =>
+												// println(s"[DEBUG] teacher query result size: ${list.size}")
+												complete(list.asJson)
+
+											case Failure(ex) =>
+												// println(s"[ERROR] teacher query failed: ${ex.getMessage}")
+												throw ex
+										}
+
+									case other =>
+										// println(s"[WARN] 未知角色：$other")
+										complete(StatusCodes.BadRequest -> "Invalid role")
+								}
+
+							case Success(None) =>
+								// println(s"[WARN] extractUidAndRole 返回 None（未授权或用户不存在）")
+								complete(StatusCodes.Unauthorized)
+
+							case Failure(ex) =>
+								// println(s"[ERROR] extractUidAndRole 抛出异常: ${ex.getMessage}")
+								complete(StatusCodes.InternalServerError -> ex.getMessage)
+						}
+					}
+				}
+			} ~
       path("check") {
         post {
           entity(as[CheckRequest]) { req =>
@@ -288,6 +347,16 @@ object Main {
           }
         }
       } 
+    }~
+    path("api" / "courses") {
+      get {
+        val query = courses.result
+          onComplete(db.run(query)) {
+            case Success(list) =>
+              complete(list.asJson)
+            case Failure(ex) => throw ex
+          }
+      }
     }
   }
 }

@@ -66,34 +66,57 @@ object Main {
   val jwtKey = "secret"
   def generateToken(uid: String): String = JwtCirce.encode(JwtClaim(subject = Some(uid)), jwtKey, JwtAlgorithm.HS256)
   def verifyToken(token: String): Option[String] = JwtCirce.decode(token, jwtKey, Seq(JwtAlgorithm.HS256)).toOption.flatMap(_.subject)
-
+	
   implicit val exceptionHandler: ExceptionHandler = ExceptionHandler {
     case ex: Throwable => extractUri { _ => complete(StatusCodes.InternalServerError -> ex.getMessage) }
   }
 
   val routes: Route = handleExceptions(exceptionHandler) {
+		println("fuck")
+		db.run(sql"SELECT 1".as[Int]).map(println)
+		println("fuck")
     pathPrefix("user") {
+			println("fuck user")
       path("register") {
-        post {
+	 			println("fuck register")
+  	    post {
           entity(as[RegisterRequest]) { req =>
+			 			println("fuck register xixi")
+						println(req.asJson.spaces2)
             if (req.username.trim.isEmpty || req.password.trim.isEmpty)
               complete(StatusCodes.BadRequest -> "Username or password cannot be empty")
             else if (req.password != req.confirmPassword)
               complete(StatusCodes.BadRequest -> "Passwords do not match")
             else {
+              val id = java.util.UUID.randomUUID().toString
               val action = users.filter(_.username === req.username).result.headOption.flatMap {
                 case Some(_) => DBIO.successful(Left("Username exists"))
                 case None =>
-                  val id = java.util.UUID.randomUUID().toString
                   val hashed = req.password.bcrypt
                   val u = User(id, req.username, hashed, req.info)
                   (users += u).map(_ => Right("Registered"))
               }.transactionally
+				 			println("fuck register xixi")
+							
               onComplete(db.run(action)) {
-                case Success(Right(msg)) => complete(StatusCodes.OK -> msg)
-                case Success(Left(err))  => complete(StatusCodes.Conflict -> err)
-                case Failure(ex)         => throw ex
-              }
+								case Success(Right(msg)) =>
+									val token = generateToken(id) 
+									val role = req.info match {
+										case _: Student => "student"
+										case _: Teacher => "teacher"
+									}
+									complete(StatusCodes.OK -> Json.obj(
+										"token" -> Json.fromString(token),
+										"username" -> Json.fromString(req.username),
+										"role" -> Json.fromString(role)
+									))
+
+								case Success(Left(err)) =>
+									complete(StatusCodes.Conflict -> err)
+
+								case Failure(ex) =>
+									throw ex
+							}
             }
           }
         }
@@ -104,15 +127,26 @@ object Main {
             if (req.username.trim.isEmpty || req.password.trim.isEmpty)
               complete(StatusCodes.BadRequest -> "Username or password cannot be empty")
             else {
-              onComplete(db.run(users.filter(_.username === req.username).result.headOption)) {
-                case Success(Some(user)) if req.password.isBcrypted(user.password) =>
-                  complete(StatusCodes.OK -> Map("token" -> generateToken(user.uid)))
-                case Success(_) =>
-                  complete(StatusCodes.Unauthorized -> "Invalid credentials")
-                case Failure(ex) =>
-                  throw ex
-              }
-            }
+							onComplete(db.run(users.filter(_.username === req.username).result.headOption)) {
+								case Success(Some(user)) if req.password.isBcrypted(user.password) =>
+									val token = generateToken(user.uid)
+									val role = user.info match {
+										case _: Student => "student"
+										case _: Teacher => "teacher"
+									}
+									complete(StatusCodes.OK -> Json.obj(
+										"token" -> Json.fromString(token),
+										"username" -> Json.fromString(user.username),
+										"role" -> Json.fromString(role)
+									))
+
+								case Success(_) =>
+									complete(StatusCodes.Unauthorized -> "Invalid credentials")
+
+								case Failure(ex) =>
+									throw ex
+							}
+						}
           }
         }
       } ~

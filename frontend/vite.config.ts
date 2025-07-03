@@ -5,11 +5,19 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:9000',
+      "/user": {
+        target: "http://localhost:8081",
         changeOrigin: true,
-        secure: false,
+      },
+      "/course": {
+        target: "http://localhost:8082",
+        changeOrigin: true,
+      },
+      '/api': {
+        target: 'http://localhost:8082',
+        changeOrigin: true,
       },
     },
   },
 })
+

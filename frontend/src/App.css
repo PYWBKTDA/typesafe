@@ -1,0 +1,167 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f5f6fa;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.header {
+  background-color: #4a90e2;
+  color: white;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 48px;
+  margin-right: 0.5rem;
+}
+
+.logo-text h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.logo-text p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.user-settings {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-settings .username {
+  font-weight: bold;
+}
+
+.term-nav {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.term-nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.term-nav a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.main {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.view-toggle {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.course-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.course-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex: 0 1 calc(48% - 1rem);
+  min-width: 320px;
+  max-width: 48%;
+}
+
+.course-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.course-title .teacher {
+  font-weight: normal;
+  color: #666;
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.course-time {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.75rem;
+}
+
+.course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.course-meta strong {
+  color: #f39c12;
+  margin: 0 0.2rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  font-size: 0.875rem;
+  color: #888;
+  border-top: 1px solid #ddd;
+  width: 100%;
+}
+
+.course-title .course-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.course-title .course-link:hover {
+  color: #4a90e2;
+  text-decoration: underline;
+}
+
+
+
+

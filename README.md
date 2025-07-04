@@ -8,7 +8,13 @@
 
 ##### aplication.conf
 
-XXX-survice/src/main/resources/application.conf
+XXX-survice/src/main/resources/application.conf（jwt只在user-service的application.conf中添加）
+
+```
+jwt {
+  secret = "your-secret-key"
+}
+```
 
 ```
 db {
@@ -67,10 +73,10 @@ CREATE TABLE enrollments (
 
 | 情况             | 状态码 | 返回 JSON                                                    |
 | ---------------- | ------ | ------------------------------------------------------------ |
-| 成功注册         | 200    | `{"status": "success", "message": "Registered"}`             |
-| 用户名重复       | 400    | `{"status": "error", "message": "Username exists"}`          |
-| 密码不一致       | 400    | `{"status": "error", "message": "Passwords do not match"}`   |
-| 用户名或密码为空 | 400    | `{"status": "error", "message": "Username or password cannot be empty"}` |
+| 成功注册         | 200    | {"status": "success", "message": "Registered"}               |
+| 用户名重复       | 400    | {"status": "error", "message": "Username exists"}            |
+| 密码不一致       | 400    | {"status": "error", "message": "Passwords do not match"}     |
+| 用户名或密码为空 | 400    | {"status": "error", "message": "Username or password cannot be empty"} |
 
 ###### POST /user/login
 
@@ -78,10 +84,10 @@ CREATE TABLE enrollments (
 
 | 情况             | 状态码 | 返回 JSON                                                    |
 | ---------------- | ------ | ------------------------------------------------------------ |
-| 登录成功         | 200    | `{"status": "success", "message": "Login successful", "data": {"token": ...}}` |
-| 用户名不存在     | 401    | `{"status": "error", "message": "Invalid credentials"}`      |
-| 密码错误         | 401    | `{"status": "error", "message": "Invalid credentials"}`      |
-| 用户名或密码为空 | 400    | `{"status": "error", "message": "Username or password cannot be empty"}` |
+| 登录成功         | 200    | {"status": "success", "message": "Login successful", "data": {"token": ...}} |
+| 用户名不存在     | 401    | {"status": "error", "message": "Invalid credentials"}        |
+| 密码错误         | 401    | {"status": "error", "message": "Invalid credentials"}        |
+| 用户名或密码为空 | 400    | {"status": "error", "message": "Username or password cannot be empty"} |
 
 ###### POST /user/update
 
@@ -91,23 +97,23 @@ CREATE TABLE enrollments (
 
 | 情况               | 状态码 | 返回 JSON                                                    |
 | ------------------ | ------ | ------------------------------------------------------------ |
-| 只更新用户信息     | 200    | `{"status": "success", "message": "Info updated"}`           |
-| 更新信息和密码     | 200    | `{"status": "success", "message": "Info and password updated"}` |
-| 旧密码错误         | 401    | `{"status": "error", "message": "Old password incorrect"}`   |
-| 新密码与确认不一致 | 400    | `{"status": "error", "message": "New passwords do not match"}` |
-| 密码字段不完整     | 400    | `{"status": "error", "message": "Incomplete password fields"}` |
-| 缺少 token         | 401    | `{"status": "error", "message": "No token"}`                 |
-| token 无效         | 401    | `{"status": "error", "message": "Invalid token"}`            |
+| 只更新用户信息     | 200    | {"status": "success", "message": "Info updated"}             |
+| 更新信息和密码     | 200    | {"status": "success", "message": "Info and password updated"} |
+| 旧密码错误         | 401    | {"status": "error", "message": "Old password incorrect"}     |
+| 新密码与确认不一致 | 400    | {"status": "error", "message": "New passwords do not match"} |
+| 密码字段不完整     | 400    | {"status": "error", "message": "Incomplete password fields"} |
+| 缺少 token         | 401    | {"status": "error", "message": "No token"}                   |
+| token 无效         | 401    | {"status": "error", "message": "Invalid token"}              |
 
 ###### GET /user/uid
 
 **Header:** Authorization
 
-| 情况       | 状态码 | 返回 JSON                                         |
-| ---------- | ------ | ------------------------------------------------- |
-| 获取成功   | 200    | `{"status": "success", "data": {"uid": ...}}`     |
-| 缺少 token | 401    | `{"status": "error", "message": "No token"}`      |
-| token 无效 | 401    | `{"status": "error", "message": "Invalid token"}` |
+| 情况       | 状态码 | 返回 JSON                                       |
+| ---------- | ------ | ----------------------------------------------- |
+| 获取成功   | 200    | {"status": "success", "data": {"uid": ...}}     |
+| 缺少 token | 401    | {"status": "error", "message": "No token"}      |
+| token 无效 | 401    | {"status": "error", "message": "Invalid token"} |
 
 ###### GET /user/info
 
@@ -115,8 +121,8 @@ CREATE TABLE enrollments (
 
 | 情况       | 状态码 | 返回 JSON                                                    |
 | ---------- | ------ | ------------------------------------------------------------ |
-| 获取成功   | 200    | `{"status": "success", "data": {"uid": ..., "name": ..., "type": ...}}` |
-| uid 不存在 | 404    | `{"status": "error", "message": "User not found"}`           |
+| 获取成功   | 200    | {"status": "success", "data": {"uid": ..., "name": ..., "type": ...}} |
+| uid 不存在 | 404    | {"status": "error", "message": "User not found"}             |
 
 ##### course-service
 

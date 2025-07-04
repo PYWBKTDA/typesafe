@@ -59,18 +59,57 @@ const LoginForm: React.FC<Props> = ({ onLogin }) => {
         body: JSON.stringify(body),
       });
 
-      if (res.status === 409) throw new Error("用户名已存在");
       if (!res.ok) {
         const msg = await res.text();
         throw new Error(msg || "请求失败");
       }
+      if(mode==="login"){
+        const data = await res.json(); // { status, message, data }
+        if(data.status==="error"){
+          throw new Error(data.message || "请求失败");
+        }
+        localStorage.setItem("token", data.data.token);
+        const uidRes = await fetch("/user/uid", {
+          headers: { Authorization: data.data.token },
+        });
+        if (!uidRes.ok) {
+          const txt = await uidRes.text();
+          throw new Error(txt || `HTTP ${uidRes.status}`);
+        }
+        const uidJson = await uidRes.json();
+        if (uidJson.status !== "success" || !uidJson.data?.uid) {
+          throw new Error(uidJson.message || "获取 UID 失败");
+        }
+        const uid = uidJson.data.uid as string;
 
-      // 注册成功后后端应直接返回 token + 角色等（与登录一致）
-      const data = await res.json(); // { username, role, token }
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("username", data.username);
-      localStorage.setItem("role", data.role);
-      onLogin({ username: data.username, token: data.token, role: data.role });
+        const infoRes = await fetch(`/user/info?uid=${encodeURIComponent(uid)}`, {
+          headers: { Authorization: data.data.token },
+        });
+        if (!infoRes.ok) {
+          const txt = await infoRes.text();
+          throw new Error(txt || `HTTP ${infoRes.status}`);
+        }
+        const infoJson = await infoRes.json();
+
+        if (infoJson.status !== "success"|| !infoJson.data.type) {
+          throw new Error(infoJson.message || "获取用户信息失败");
+        }
+        const userRole = infoJson.data.type as "student" | "teacher";
+
+        localStorage.setItem("username", username);
+        localStorage.setItem("role", userRole);
+        onLogin({ username: username, token: data.data.token, role: userRole });
+      }
+      if(mode==="register"){
+        const data = await res.json();
+        if(data.message=="error"){
+          throw new Error(data.message || "请求失败");
+        }
+        alert("注册成功，请使用账号密码登录");
+        setPassword("");
+        setMode("login");
+        return;                      
+      }
     } catch (err: any) {
       setError(err.message || "发生错误");
     }

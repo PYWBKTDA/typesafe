@@ -632,7 +632,7 @@ class CourseApiSpec extends CatsEffectSuite {
       }
     }
   }
-  
+
   test("GET /course/list - 查询成功") {
     transactor.use { xa =>
       val repo = new CourseRepo(xa)
@@ -641,11 +641,13 @@ class CourseApiSpec extends CatsEffectSuite {
         override def getUserInfoByUid(uid: String) = IO.pure(None)
       }
       val service = new CourseService(repo, userClient)
+
       for {
         _ <- repo.insert(Course(UUID.randomUUID().toString, "课程1", "t1", "老师1", "时间", "地点"))
         _ <- repo.insert(Course(UUID.randomUUID().toString, "课程2", "t2", "老师2", "时间", "地点"))
-        result <- service.listCourses()
-        _ = assert(result.nonEmpty)
+        result <- service.listAllCourses
+        _ = assert(result.exists(_.name == "课程1"))
+        _ = assert(result.exists(_.name == "课程2"))
       } yield ()
     }
   }
@@ -684,5 +686,110 @@ class CourseApiSpec extends CatsEffectSuite {
     }
   }
 
+  test("GET /course/students - 查询成功") {
+    transactor.use { xa =>
+      val repo = new CourseRepo(xa)
+      val courseId = UUID.randomUUID().toString
+      val uid = "teacher-uid"
+      val userClient = new UserClient {
+        override def getUserInfo(token: String) = IO.pure(Some((uid, "teacher", "老师")))
+        override def getUserInfoByUid(uid: String) = IO.pure(Some(("teacher", "老师")))
+      }
+      val service = new CourseService(repo, userClient)
 
+      for {
+        _ <- repo.insert(Course(courseId, "课程", uid, "老师", "时间", "地点"))
+        _ <- repo.enroll("student1", courseId)
+        _ <- repo.enroll("student2", courseId)
+        result <- service.listStudents(courseId, "Bearer token")
+        _ = assertEquals(result, Right(List("student1", "student2")))
+      } yield ()
+    }
+  }
+
+  test("GET /course/students - 非教师身份") {
+    transactor.use { xa =>
+      val repo = new CourseRepo(xa)
+      val courseId = UUID.randomUUID().toString
+      val userClient = new UserClient {
+        override def getUserInfo(token: String) = IO.pure(Some(("uid", "student", "学生")))
+        override def getUserInfoByUid(uid: String) = IO.pure(Some(("student", "学生")))
+      }
+      val service = new CourseService(repo, userClient)
+
+      service.listStudents(courseId, "Bearer token").map {
+        case Left(AuthError(msg)) => assertEquals(msg, "Only teacher allowed")
+        case _ => fail("应返回 Only teacher allowed")
+      }
+    }
+  }
+
+  test("GET /course/students - 非课程拥有者") {
+    transactor.use { xa =>
+      val repo = new CourseRepo(xa)
+      val courseId = UUID.randomUUID().toString
+      val userClient = new UserClient {
+        override def getUserInfo(token: String) = IO.pure(Some(("not-owner", "teacher", "张老师")))
+        override def getUserInfoByUid(uid: String) = IO.pure(Some(("teacher", "张老师")))
+      }
+      val service = new CourseService(repo, userClient)
+
+      for {
+        _ <- repo.insert(Course(courseId, "课程", "owner-uid", "老师A", "时间", "地点"))
+        result <- service.listStudents(courseId, "Bearer token")
+        _ = assertEquals(result, Left(AuthError("Not owner")))
+      } yield ()
+    }
+  }
+
+  test("GET /course/students - 课程不存在") {
+    transactor.use { xa =>
+      val repo = new CourseRepo(xa)
+      val courseId = UUID.randomUUID().toString
+      val userClient = new UserClient {
+        override def getUserInfo(token: String) = IO.pure(Some(("uid", "teacher", "老师")))
+        override def getUserInfoByUid(uid: String) = IO.pure(Some(("teacher", "老师")))
+      }
+      val service = new CourseService(repo, userClient)
+
+      service.listStudents(courseId, "Bearer token").map {
+        case Left(NotFoundError(msg)) => assertEquals(msg, "Course not found")
+        case _ => fail("应返回 Course not found")
+      }
+    }
+  }
+
+  test("GET /course/students - 缺少 token") {
+    transactor.use { xa =>
+      val repo = new CourseRepo(xa)
+      val courseId = UUID.randomUUID().toString
+      val userClient = new UserClient {
+        override def getUserInfo(token: String) = IO.pure(None)
+        override def getUserInfoByUid(uid: String) = IO.pure(None)
+      }
+      val service = new CourseService(repo, userClient)
+
+      service.listStudents(courseId, "").map {
+        case Left(AuthError(msg)) => assertEquals(msg, "Invalid token")
+        case _ => fail("应返回 Invalid token")
+      }
+    }
+  }
+
+  test("GET /course/students - token 无效") {
+    transactor.use { xa =>
+      val repo = new CourseRepo(xa)
+      val courseId = UUID.randomUUID().toString
+      val userClient = new UserClient {
+        override def getUserInfo(token: String) = IO.pure(None)
+        override def getUserInfoByUid(uid: String) = IO.pure(None)
+      }
+      val service = new CourseService(repo, userClient)
+
+      service.listStudents(courseId, "Bearer fake").map {
+        case Left(AuthError(msg)) => assertEquals(msg, "Invalid token")
+        case _ => fail("应返回 Invalid token")
+      }
+    }
+  }
 }

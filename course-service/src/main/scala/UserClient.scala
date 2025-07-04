@@ -18,35 +18,38 @@ class UserClient {
   private val infoUrl = uri"http://localhost:8081/user/info"
 
   def getUserInfo(token: String): IO[Option[(String, String, String)]] = {
-    val cleanToken =
-  if (token.startsWith("Bearer ")) token
-  else s"Bearer $token"
-
-val req = Request[IO](Method.GET, uidUrl)
-  .withHeaders(Headers(Header.Raw(ci"Authorization", cleanToken)))
-
+    val req = Request[IO](Method.GET, uidUrl)
+      .withHeaders(Headers.of(Header.Raw(ci"Authorization", token)))
     EmberClientBuilder.default[IO].build.use { client =>
       client.expect[String](req).attempt.flatMap {
         case Left(_) => IO.pure(None)
         case Right(body) =>
-          parse(body).flatMap(_.hcursor.downField("data").get[String]("uid")) match {
+          parse(body) match {
             case Left(_) => IO.pure(None)
-            case Right(uid) =>
-              val infoReq = Request[IO](Method.GET, infoUrl.withQueryParam("uid", uid))
-              client.expect[String](infoReq).attempt.map {
-                case Left(_) => None
-                case Right(infoBody) =>
-                  val json  = parse(infoBody).getOrElse(Json.Null).hcursor.downField("data")
-                  val role  = json.get[String]("type").getOrElse("")
-                  val name  = json.get[String]("name").getOrElse("")
-                  Some((uid, role, name))
+            case Right(json) =>
+              json.hcursor.downField("data").get[String]("uid") match {
+                case Left(_) => IO.pure(None)
+                case Right(uid) =>
+                  val infoReq = Request[IO](Method.GET, infoUrl.withQueryParam("uid", uid))
+                  client.expect[String](infoReq).attempt.map {
+                    case Left(_) => None
+                    case Right(infoBody) =>
+                      parse(infoBody) match {
+                        case Left(_) => None
+                        case Right(infoJson) =>
+                          val cursor = infoJson.hcursor.downField("data")
+                          val role = cursor.get[String]("type").getOrElse("")
+                          val name = cursor.get[String]("name").getOrElse("")
+                          Some((uid, role, name))
+                      }
+                  }
               }
           }
       }
     }
   }
 
-   def getUserInfoByUid(uid: String): IO[Option[(String, String)]] = {
+  def getUserInfoByUid(uid: String): IO[Option[(String, String)]] = {
     val infoReq = Request[IO](Method.GET, infoUrl.withQueryParam("uid", uid))
     EmberClientBuilder.default[IO].build.use { client =>
       client.expect[String](infoReq).attempt.map {

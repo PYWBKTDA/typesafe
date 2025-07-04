@@ -1,4 +1,4 @@
-前端：
+前端：npm run dev
 
 后端：XXX-survice中执行sbt run运行或sbt test测试
 

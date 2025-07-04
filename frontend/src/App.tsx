@@ -9,7 +9,7 @@ import {
 
 import LoginForm     from "./LoginForm";
 import CourseDetail  from "./CourseDetail";
-import AuthPage      from "./AuthPage";
+import Profile      from "./Profile";
 import "./App.css";
 
 /* ---------- 类型 ---------- */
@@ -39,6 +39,7 @@ const App: React.FC = () => {
   /* ---------- 从 localStorage 读取登录态 ---------- */
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log(token);
     const username = localStorage.getItem("username");
     const role = localStorage.getItem("role") as "student" | "teacher" | null;
     if (token && username && role) setUser({ username, token, role });
@@ -99,12 +100,6 @@ const App: React.FC = () => {
   /* ---------- 已登录：主界面 + 详情 / 个人中心 路由 ---------- */
   return (
     <Routes>
-      {/* 课程详情 */}
-      <Route path="/course/:id" element={<CourseDetail />} />
-
-      {/* 个人中心 auth */}
-      <Route path="/auth" element={<AuthPage />} />
-
       {/* 默认：课程列表 */}
       <Route
         path="/*"
@@ -130,7 +125,7 @@ const App: React.FC = () => {
                   <span
                     className="username"
                     style={{ cursor: "pointer" }}
-                    onClick={() => navigate("/auth")}
+                    onClick={() => navigate("/profile")}
                   >
                     {user.username}
                   </span>
@@ -145,11 +140,20 @@ const App: React.FC = () => {
                 <a href="#">公开课程</a>
               </nav>
 
-              {user.role === "teacher" && (
-                <div className="create-course-bar">
-                  <button onClick={() => navigate("/manage")}>进入课程管理</button>
-                </div>
-              )}
+              <div className="create-course-bar">
+                {user.role === "teacher" && (
+                  <button onClick={() => navigate("/manage")}>
+                    进入课程管理
+                  </button>
+                )}
+                {user.role === "student" && (
+                  <button onClick={() => navigate("/select")}>
+                    选课管理
+                  </button>
+                )}
+              </div>
+
+
             </header>
 
             {/* ===== 主体 ===== */}

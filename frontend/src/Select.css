@@ -1,0 +1,126 @@
+/* Select.css */
+
+/* 页面整体容器 */
+.select-container {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 返回按钮样式 */
+.return-button {
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+
+/* 标题样式 */
+.select-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #333;
+}
+
+/* 课程列表布局 */
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* 单个课程卡片 */
+.course-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  flex: 0 1 calc(48% - 1rem);
+  min-width: 280px;
+  max-width: 48%;
+  transition: box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 课程信息块 */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.card-info h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1976d2;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.card-info h3:hover {
+  color: #004ba0;
+}
+
+.card-info span {
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.card-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* 按钮组（选课 / 退课） */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.action-buttons button {
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  min-width: 80px;
+  text-transform: none;
+}
+
+/* Footer 可选样式 */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  font-size: 0.875rem;
+  color: #888;
+  border-top: 1px solid #ddd;
+  width: 100%;
+  margin-top: 40px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .course-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .action-buttons button {
+    min-width: 100px;
+  }
+}

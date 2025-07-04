@@ -1,13 +1,15 @@
-// src/pages/CourseManagement.tsx
 import React, { useEffect, useState } from 'react';
 import {
   Box, Button, Card, CardContent, IconButton,
-  TextField, Typography,
+  TextField, Typography, Dialog, DialogTitle,
+  DialogContent, DialogActions
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EditIcon from '@mui/icons-material/Edit';
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
+import './CourseManagement.css';
 
 /* ---------- 类型 ---------- */
 interface Course {
@@ -32,11 +34,14 @@ export default function CourseManagement() {
   const [form, setForm] = useState({ name: '', time: '', location: '' });
   const [errors, setErrors] = useState<Partial<Record<keyof typeof form, string>>>({});
 
+  const [editOpen, setEditOpen] = useState(false);
+  const [editCourse, setEditCourse] = useState<Course | null>(null);
+  const [editForm, setEditForm] = useState({ name: '', time: '', location: '' });
+
   const token = localStorage.getItem('token');
-  console.log(token);
   const navigate = useNavigate();
 
-  /* ---------- 拉取教师自己发布的课程 ---------- */
+  /* ---------- 拉取课程 ---------- */
   const fetchMyCourses = async () => {
     try {
       const uidRes = await fetch('/user/uid', { headers: { Authorization: token } });
@@ -63,13 +68,13 @@ export default function CourseManagement() {
 
   useEffect(() => { fetchMyCourses(); }, []);
 
-  /* ---------- 输入处理 ---------- */
+  /* ---------- 新建输入处理 ---------- */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
     setErrors(err => ({ ...err, [e.target.name]: undefined }));
   };
 
-  /* ---------- 新建课程 ---------- */
+  /* ---------- 新建 ---------- */
   const handleAdd = async () => {
     const check = createSchema.safeParse(form);
     if (!check.success) {
@@ -86,26 +91,18 @@ export default function CourseManagement() {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: form.name,
-          time: form.time,
-          location: form.location,
-        }),
+        body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error(await res.text());
       alert('添加成功');
       setForm({ name: '', time: '', location: '' });
       fetchMyCourses();
     } catch (err: any) {
-      console.log(token);
-      console.log(form.name);
-      console.log(form.time);
-      console.log(form.location);
       alert('添加失败：' + err.message);
     }
   };
 
-  /* ---------- 删除课程 ---------- */
+  /* ---------- 删除 ---------- */
   const handleDelete = async (courseId: string) => {
     if (!window.confirm('确认删除该课程？')) return;
     try {
@@ -122,10 +119,58 @@ export default function CourseManagement() {
     }
   };
 
+  /* ---------- 编辑：打开弹窗 ---------- */
+  const handleEdit = (course: Course) => {
+    setEditCourse(course);
+    setEditForm({
+      name: course.name,
+      time: course.time,
+      location: course.location,
+    });
+    setEditOpen(true);
+  };
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+    setEditCourse(null);
+  };
+
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleUpdate = async () => {
+    if (!editCourse) return;
+    try {
+      const res = await fetch('/course/update', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          courseId: editCourse.id,
+          ...editForm,
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      alert('更新成功');
+      setEditOpen(false);
+      fetchMyCourses();
+    } catch (err: any) {
+      alert('更新失败：' + err.message);
+    }
+  };
+
   /* ---------- UI ---------- */
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', bgcolor: '#f9f9f9', p: 4 }}>
-      <Button startIcon={<ArrowBackIcon />} onClick={() => navigate('/')} variant="outlined" sx={{ mb: 3 }}>
+    <Box className="container">
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate('/')}
+        variant="outlined"
+        className="return-button"
+      >
         返回主界面
       </Button>
 
@@ -133,26 +178,25 @@ export default function CourseManagement() {
         课程管理（教师专属）
       </Typography>
 
-      {/* 添加课程表单 */}
       <Box
         component="form"
-        sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 4, width: '100%', justifyContent: 'space-between' }}
+        className="form-container"
         onSubmit={e => { e.preventDefault(); handleAdd(); }}
       >
         <TextField
           label="课程名称" name="name" value={form.name}
           onChange={handleChange} error={!!errors.name} helperText={errors.name}
-          sx={{ flex: 1 }}
+          className="text-field"
         />
         <TextField
           label="上课时间" name="time" value={form.time}
           onChange={handleChange} error={!!errors.time} helperText={errors.time}
-          sx={{ flex: 1 }}
+          className="text-field"
         />
         <TextField
           label="课程地点" name="location" value={form.location}
           onChange={handleChange} error={!!errors.location} helperText={errors.location}
-          sx={{ flex: 1 }}
+          className="text-field"
         />
         <Button type="submit" variant="contained">添加课程</Button>
       </Box>
@@ -161,30 +205,60 @@ export default function CourseManagement() {
         已发布课程（共 {courses.length} 门）
       </Typography>
 
-      {/* 课程列表 */}
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+      <Box className="course-list">
         {courses.map(c => (
-          <Card key={c.id}
-            sx={{
-              flex: '1 1 calc(50% - 8px)', minWidth: 280,
-              transition: '0.3s', '&:hover': { boxShadow: 3 },
-              display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-            }}
-          >
-            <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Box>
-                <Typography fontWeight="bold">{c.name}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  老师：{c.teacherName} / 时间：{c.time} / 地点：{c.location}
+          <Card key={c.id} className="course-card">
+            <CardContent className="card-content">
+              <Box className="card-info">
+                <Typography
+                  variant="h6"
+                  className="course-title-link"
+                  onClick={() => navigate(`/course/${c.id}`)}
+                >
+                  {c.name}
                 </Typography>
+                <span>老师：{c.teacherName}</span>
+                <div className="card-meta">
+                  <span>时间：{c.time}</span>
+                  <span>地点：{c.location}</span>
+                </div>
               </Box>
-              <IconButton color="error" onClick={() => handleDelete(c.id)}>
-                <DeleteIcon />
-              </IconButton>
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <IconButton color="primary" onClick={() => handleEdit(c)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton color="error" onClick={() => handleDelete(c.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
             </CardContent>
           </Card>
         ))}
       </Box>
+
+
+
+      <Dialog open={editOpen} onClose={handleEditClose} fullWidth maxWidth="sm">
+        <DialogTitle>编辑课程信息</DialogTitle>
+        <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+          <TextField
+            label="课程名称" name="name" value={editForm.name}
+            onChange={handleEditChange}
+          />
+          <TextField
+            label="上课时间" name="time" value={editForm.time}
+            onChange={handleEditChange}
+          />
+          <TextField
+            label="课程地点" name="location" value={editForm.location}
+            onChange={handleEditChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleEditClose}>取消</Button>
+          <Button variant="contained" onClick={handleUpdate}>保存</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

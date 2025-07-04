@@ -1,25 +1,23 @@
-/* CourseManagement.css */
-
 /* Ensure the container spans the entire width and height */
 .container {
   width: 100vw;
-  min-height: 100vh;  /* Make the container at least as tall as the viewport */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;  /* Center content horizontally */
+  align-items: center;
   justify-content: flex-start;
-  padding: 2rem; /* Add some space around */
+  padding: 2rem;
   background-color: #f5f5f5;
-  overflow-x: hidden;  /* Prevent horizontal scrolling */
+  overflow-x: hidden;
 }
 
-/* Ensure the return button is positioned correctly */
+/* Return button styling */
 .return-button {
   margin-bottom: 20px;
-  align-self: flex-start; /* Align the button to the left */
+  align-self: flex-start;
 }
 
-/* Form container should use flex layout */
+/* Form layout */
 .form-container {
   width: 100%;
   display: flex;
@@ -29,32 +27,34 @@
   margin-bottom: 40px;
 }
 
-/* Each input field should be full width for better mobile support */
+/* Inputs and buttons for responsive layout */
 .text-field {
   width: 45%;
-  min-width: 200px; /* Ensure some minimum size */
+  min-width: 200px;
 }
 
 button {
-  width: 45%;  /* Ensure button stretches to the same width */
+  width: 45%;
 }
 
+/* Main course list layout */
 .course-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: flex-start;
-  width: 100%;  /* Make the course list fill the entire screen width */
+  width: 100%;
 }
 
+/* Course card styling */
 .course-card {
   background-color: white;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex: 0 1 calc(48% - 1rem);  /* Make course cards flexible and responsive */
+  flex: 0 1 calc(48% - 1rem);
   min-width: 280px;
-  max-width: 48%;  /* Take up half the screen minus spacing */
+  max-width: 48%;
   transition: box-shadow 0.3s;
 }
 
@@ -62,25 +62,57 @@ button {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Card content layout */
+/* Card content layout with buttons */
 .card-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
+/* Compact IconButtons for teacher edit/delete */
+.card-content .MuiIconButton-root {
+  padding: 6px;
+}
+
+/* Student action button group */
+.student-action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.student-action-buttons button {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  min-width: 70px;
+  text-transform: none;
+}
+
+/* Course info block */
 .card-info {
   display: flex;
   flex-direction: column;
 }
 
-.card-info h3 {
+/* Clickable course title styling */
+.card-info h3,
+.card-info .course-title-link {
   margin-bottom: 0.5rem;
   font-weight: bold;
   font-size: 1.2rem;
+  color: #1976d2;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;
 }
 
+.card-info h3:hover,
+.card-info .course-title-link:hover {
+  color: #004ba0;
+}
+
+/* Additional meta info */
 .card-info span {
   color: #777;
 }
@@ -103,7 +135,7 @@ button {
   width: 100%;
 }
 
-/* Mobile-friendly adjustments */
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .form-container {
     flex-direction: column;
@@ -111,10 +143,19 @@ button {
   }
 
   .text-field {
-    width: 80%;  /* On smaller screens, make input fields take more space */
+    width: 80%;
   }
 
   button {
     width: 80%;
+  }
+
+  .course-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .student-action-buttons button {
+    min-width: 100px;
   }
 }

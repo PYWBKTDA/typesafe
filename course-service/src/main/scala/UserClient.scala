@@ -49,7 +49,7 @@ class UserClient {
     }
   }
 
-  def getUserInfoByUid(uid: String): IO[Option[(String, String)]] = {
+   def getUserInfoByUid(uid: String): IO[Option[(String, String)]] = {
     val infoReq = Request[IO](Method.GET, infoUrl.withQueryParam("uid", uid))
     EmberClientBuilder.default[IO].build.use { client =>
       client.expect[String](infoReq).attempt.map {

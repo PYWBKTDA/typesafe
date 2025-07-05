@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* src/pages/CourseDetail.css */
 
 /* 外部容器，保证内容充满浏览器屏幕 */
@@ -52,3 +53,125 @@
 .course-info-container strong {
   margin-bottom: 10px;
 }
+=======
+/* 外部容器，保证内容充满浏览器屏幕 */
+.course-detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f9f9f9;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* 返回按钮样式 */
+.back-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+}
+
+/* 课程信息展示区域整体卡片 */
+.course-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 课程名称标题 */
+.course-info-container h4 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+/* 教师信息和字段展示 */
+.course-info-container p,
+.course-info-container strong,
+.course-info-container .MuiTypography-root {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+/* Divider 的上下面间距 */
+.course-info-container .MuiDivider-root {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+/* 学生列表标题 */
+.course-info-container .student-list-title {
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* 学生列表整体布局 */
+.course-info-container .student-list {
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* 单个学生列表项 */
+.course-info-container .student-list-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 学生姓名 */
+.course-info-container .student-list-item-name {
+  font-weight: 500;
+}
+
+/* 学生 UID 次级文字 */
+.course-info-container .student-list-item-uid {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* 加载中、错误、空提示文字 */
+.course-info-container .info-message {
+  color: #888;
+  font-size: 0.95rem;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* 适配小屏幕 */
+@media (max-width: 768px) {
+  .course-info-container {
+    padding: 16px;
+  }
+
+  .course-info-container h4 {
+    font-size: 1.3rem;
+  }
+
+  .course-info-container p,
+  .course-info-container strong,
+  .course-info-container .MuiTypography-root {
+    font-size: 0.95rem;
+  }
+
+  .course-info-container .student-list-item {
+    padding: 10px 12px;
+  }
+}
+>>>>>>> 56873210bdceee95aed3cde7b49554c5fcc480a8
